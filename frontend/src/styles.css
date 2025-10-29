@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  /* ===== Verdes ===== */
+  --green-dark: #1d3327;
+  --green-mid: #355f49;
+  --green-light: #a2b18a;
+  --green-plus-light: #d8e9bd;
+
+  /* Degradado verde */
+  --green-gradient: linear-gradient(135deg, #9cab86 0%, #3b5445 100%);
+
+  /* ===== Marrones ===== */
+  --brown-dark: #4e4239;
+  --brown-mid: #7e6b5d;
+  --brown-light: #bb9f8c;
+  
+  /* ===== Extras suaves ===== */
+  --bg-light: #f5f5f2;
+  --text-dark: #1a1a1a;
+  --text-light: #ffffff;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: var(--green-gradient);
+  color: #f0f0f0;
+}

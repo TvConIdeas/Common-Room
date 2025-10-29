@@ -1,1 +1,22 @@
-<p>header works!</p>
+<header>
+    <!-- * ============ Logo ============ -->
+    <div class="logo-container">
+        <a routerLink="/" class="logo-link" title="Home">
+            <img src="assets/img/iconLetter.png" alt="App logo" class="logo-img" />
+        </a>
+    </div>
+
+    <!-- * ============ Search bar ============ -->
+    <form class="search-container">
+        <input type="text" name="query" class="search-bar" placeholder="Buscar..." required />
+        <button type="submit" class="search-icon" title="Buscar">🔍</button>
+    </form>
+
+    <!-- * ============ Otras Rutas | Usuario ============ -->
+    <div class="info-container">
+        <ul>
+            <li><a routerLink="/login">Login</a></li>
+            <li><a routerLink="/users">Users</a></li>
+        </ul>
+    </div>
+</header>
