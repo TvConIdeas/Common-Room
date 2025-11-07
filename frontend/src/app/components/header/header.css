@@ -4,6 +4,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-align: center;
+    gap: 0.625rem;
     padding: 1% 1.25%;
     background-color: var(--green-dark);
 }
@@ -12,7 +14,6 @@ header {
 header .logo-container {
     display: flex;
     align-items: center;
-    gap: 0.625rem;
 }
 
 header .logo-img {
@@ -40,10 +41,13 @@ header .logo-container:hover .logo-img {
     min-width: 8rem;
     padding: 0.5rem 0.75rem;
     font-size: 1rem;
-    color: var(--text-dark);
     background: var(--green-light);
     border: none;
     border-radius: 0.25rem;
+}
+
+.search-bar::placeholder{
+    color: var(--green-dark);
 }
 
 .search-icon {
@@ -71,7 +75,7 @@ header .logo-container:hover .logo-img {
     color: var(--text-dark);
     text-decoration: none;
     background-color: var(--green-light);
-    transition: color 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .info-container a:hover {
