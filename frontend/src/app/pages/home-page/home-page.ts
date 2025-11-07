@@ -20,18 +20,34 @@ export class HomePage implements OnInit{
   currentPagePopular = 1;
   currentPageUpcoming = 1;
 
+  /* ====== Contructor | ngOnInit ====== */
   constructor(private mService : MovieService) {}
 
   ngOnInit(): void {
     this.loadRecentMovies();
   }
 
-  /* -------- Funcion para cargar las peliculas actuales -------- */
+  /* -------- Metodo para cargar las peliculas actuales -------- */
   loadRecentMovies() : void {
-    this.mService.getRecentMovies(this.currentPage).subscribe({
+    this.mService.getRecentMovies(this.currentPageRecent).subscribe({
       next : (data) => this.recentMovies = data,
       error : (e) => console.error(e)
     })
+  }
+
+  loadPopularMovies() : void {
+    this.mService.getPopularMovies(this.currentPagePopular).subscribe({
+      next : (data) => this.popularMovies = data,
+      error : (e) => console.error(e)
+    })
+  }
+
+  loadUpcomingMovies() : void {
+    this.mService.getPopularMovies(this.currentPageUpcoming).subscribe({
+      next : (data) => this.upcomingMovies = data,
+      error : (e) => console.error(e)
+    })
+
   }
 
 
