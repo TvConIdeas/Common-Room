@@ -1,1 +1,14 @@
-<p>home-page works!</p>
+<div class="container mt-4">
+
+    <!-- HTML de testeo -->
+    <h2>Películas Populares</h2>
+
+    <!-- Grid de películas -->
+    @for (movie of recentMovies; track movie.id) {
+        <img [src]="movie.posterUrl" alt="{{ movie.title }}">
+        <h4>{{ movie.title }}</h4>
+        <p>{{ movie.releaseDate }}</p>
+    }
+
+</div>
+
