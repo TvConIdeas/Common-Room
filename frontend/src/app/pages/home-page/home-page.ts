@@ -28,7 +28,7 @@ export class HomePage implements OnInit{
 
   /* -------- Funcion para cargar las peliculas actuales -------- */
   loadRecentMovies() : void {
-    this.mService.getRecentMovies(this.currentPage).subscribe({
+    this.mService.getRecentMovies(this.currentPageRecent).subscribe({
       next : (data) => this.recentMovies = data,
       error : (e) => console.error(e)
     })
