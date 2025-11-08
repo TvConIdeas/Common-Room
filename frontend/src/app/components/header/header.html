@@ -7,8 +7,8 @@
     </div>
 
     <!-- * ============ Search bar ============ -->
-    <form class="search-container">
-        <input type="text" name="query" class="search-bar" placeholder="Buscar..." required />
+    <form class="search-container" (ngSubmit)="onSearch()">
+        <input type="text" name="query" class="search-bar" placeholder="Buscar..." required [(ngModel)]="searchQuery"/>
         <button type="submit" class="search-icon" title="Buscar">🔍</button>
     </form>
 

@@ -38,4 +38,9 @@ export class MovieService {
     return this.http.get<MovieBase[]>(`${this.API_URL}/upcoming?page=${page}`)
   }
 
+  //Metodo para buscar peliculas
+  searchMovies(query: string, page: number = 1) {
+    const pageSize = 20
+    return this.http.get<MovieBase[]>(`${this.API_URL}/search?query=${query}&page=${page}&pageSize=${pageSize}`)
+  }
 }
