@@ -20,12 +20,14 @@ export class SearchPage implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    const searchQuery = this.actRoute.snapshot.params['query']
-    this.loadMovies(searchQuery)
+    this.loadMovies()
+    //this.loadMovies(searchQuery)
   }
 
-  loadMovies(query : string ) {
-    this.mService.searchMovies(query, this.currentPage).subscribe({
+  loadMovies() {
+    const searchQuery = this.actRoute.snapshot.params['query']
+    console.log('Buscando peliculas con el termino:', searchQuery)
+    this.mService.searchMovies(searchQuery, this.currentPage).subscribe({
       next: (data) => {
         this.movies = data
       },
