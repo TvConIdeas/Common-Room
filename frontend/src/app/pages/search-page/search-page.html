@@ -1,1 +1,22 @@
-<p>search-page works!</p>
+<div>
+    @for (movie of movies; track movie.id) {
+            <a [routerLink]="['/movies', movie.id]">
+                <div class="movie-card">
+                    <img [src]="movie.posterUrl" alt="{{movie.title}}">
+                    <h4>{{movie.title}}</h4>
+                    <p>{{movie.releaseDate}}</p>
+                    <p class="synopsis">{{movie.synopsis}}</p>
+                </div>
+            </a>
+        }
+
+    <div>
+        <button (click) = "previousPage()" 
+        [disabled]="currentPage === 1"><-</button>
+
+        <span>Page {{currentPage}}</span>
+
+        <button (click) = "nextPage()"
+        [disabled]="!hasMorePages">-></button>
+    </div>
+</div>

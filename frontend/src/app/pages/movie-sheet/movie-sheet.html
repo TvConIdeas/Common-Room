@@ -1,1 +1,15 @@
-<p>movie-sheet works!</p>
+@if(chosenMovie){
+    <h3>{{chosenMovie.title}}</h3>
+    <img src="{{chosenMovie.posterUrl}}" alt="movie poster">
+    <h4>{{chosenMovie.releaseDate}}</h4>
+    <h4>{{chosenMovie.synopsis}}</h4>
+    <h4>{{chosenMovie.duration}}</h4>
+    <h4>{{chosenMovie.genres}}</h4>
+    <h4>{{chosenMovie.voteAverage}}</h4>
+    <h4>{{chosenMovie.budget}}</h4>
+    <h4>{{chosenMovie.revenue}}</h4>
+    <h4>{{chosenMovie.backdropUrl}}</h4>
+}
+@else{
+    <h3>No movie was found with that title</h3>
+}

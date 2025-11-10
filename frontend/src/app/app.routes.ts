@@ -10,11 +10,12 @@ import { SearchPage } from './pages/search-page/search-page';
 export const routes: Routes = [
     {path: '', component: HomePage},
     {path: 'login', component: LoginPage},
-    {path: 'movie-details/:id', component: MovieSheet},
-    {path: 'user-details/:username', component: UserProfile},
+    {path: 'movies', component: MoviesList},
+    {path: 'movies/:id', component: MovieSheet},
+    {path: 'movies/search/:query', component: SearchPage},
     {path: 'users', component: UsersList},
-    {path: 'movies-list', component: MoviesList},
-    {path: 'movies-list/search/:query', component: SearchPage}
-
+    {path: 'users/:username', component: UserProfile},
+    //Cualquier otra ruta redirige a home
+    {path: '', redirectTo: '/', pathMatch: 'full'},
 ];
 
