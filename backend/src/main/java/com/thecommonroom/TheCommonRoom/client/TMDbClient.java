@@ -24,25 +24,25 @@ public class TMDbClient {
     private final RestTemplate restTemplate; // Clase de Spring para hacer peticiones HTTP
 
     public RawMovieDTO getMovieById(Long id){
-        String url = String.format("%s/movie/%d?api_key=%s&language=es-AR", baseUrl, id, key);
+        String url = String.format("%s/movie/%d?api_key=%s&language=en-US", baseUrl, id, key);
         return restTemplate.getForObject(url, RawMovieDTO.class);
     }
 
     ///  PAGINACION DE PELICULAS | Llama a la API de TMDb y devuelve películas populares (paginadas)
     public RawMovieListDTO getPopularMovies(int page) {
-        String url = String.format("%s/movie/popular?api_key=%s&page=%d&language=es-AR", baseUrl, key, page);
+        String url = String.format("%s/movie/popular?api_key=%s&page=%d&language=en-US", baseUrl, key, page);
         return restTemplate.getForObject(url, RawMovieListDTO.class);
     }
 
     public RawMovieListDTO getRecentMovies(int page) {
-        String url = String.format("%s/movie/now_playing?api_key=%s&page=%d&language=es-AR&region=AR", baseUrl, key, page);
+        String url = String.format("%s/movie/now_playing?api_key=%s&page=%d&language=en-US&region=AR", baseUrl, key, page);
         return restTemplate.getForObject(url, RawMovieListDTO.class);
     }
 
     public RawMovieListDTO getAllMovies(int page){
         String url = String.format("%s/discover/movie?api_key=%s" +
                                     "&page=%d" +
-                                    "&language=es-AR" +
+                                    "&language=en-US" +
                                     "&region=AR" +
                                     "&sort_by=popularity.desc", baseUrl, key, page);
         return restTemplate.getForObject(url, RawMovieListDTO.class);
@@ -51,7 +51,7 @@ public class TMDbClient {
     public RawMovieListDTO getUpcomingMovies(int page){
         String url = String.format("%s/movie/upcoming?api_key=%s" +
                                     "&page=%d" +
-                                    "&language=es-AR" +
+                                    "&language=en-US" +
                                     "&region=AR", baseUrl, key, page);
         return restTemplate.getForObject(url, RawMovieListDTO.class);
     }
@@ -59,7 +59,7 @@ public class TMDbClient {
     ///  BARRA DE BUSQUEDA | Llama a la API de TMDb y devuelve las peliculas que contengan la query en el nombre
     public RawMovieListDTO searchMovies(String query, int page) {
         String url = String.format(
-                "%s/search/movie?api_key=%s&query=%s&page=%d&language=es-AR",
+                "%s/search/movie?api_key=%s&query=%s&page=%d&language=en-US",
                 baseUrl, key, query, page
         );
         return restTemplate.getForObject(url, RawMovieListDTO.class);

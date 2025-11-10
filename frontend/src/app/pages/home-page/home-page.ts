@@ -1,68 +1,114 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import MovieBase from '../../models/MovieBase';
 import { MovieService } from '../../services/movie-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css'
 })
 
-export class HomePage implements OnInit{
-  /* ---- Array de peliculas a mostrar ---- */
+export class HomePage implements OnInit, OnDestroy{
+
+  // ! ---- Array de peliculas a mostrar ----
   recentMovies : MovieBase[] = [];
   popularMovies : MovieBase[] = [];
   upcomingMovies : MovieBase[] = [];
 
-  /* -- Pagina actual de cada Lista -- */
-  currentPageRecent = 1;
-  currentPagePopular = 1;
-  currentPageUpcoming = 1;
+  // ! ---- Estado de los carouseles ----
+  indices = {
+    recent: 0,
+    popular: 0,
+    upcoming: 0
+  };
 
-  /* ====== Contructor | ngOnInit ====== */
+  autoSlides: { [key: string]: any } = {};
+
+  // ! ====== Contructor | ngOnInit ======
   constructor(private mService : MovieService) {}
 
   ngOnInit(): void {
     this.loadAllMovies();
   }
 
-  /* -------- Metodo para reemplazar posters sin imagen -------- */
+  ngOnDestroy(): void {
+    Object.values(this.autoSlides).forEach(interval => clearInterval(interval));
+  }
+
+  // * -------- Metodo para reemplazar posters sin imagen -------- 
   onImgError(event: Event): void {
     const img = event.target as HTMLImageElement;
-    img.src = 'assets/img/default-poster.jpg'; 
-    img.onerror = null;
-    img.alt = 'Poster no disponible';
+    img.src = 'assets/img/default-poster.jpg';
   }
 
-  /* -------- Metodo para cargar todo -------- */
+  // ! ====== Metodo para cargar todo ======
   loadAllMovies() : void{
-    this.loadRecentMovies();
-    this.loadPopularMovies();
-    this.loadUpcomingMovies();
-  }
+    // ? ----- Recent Movies -----
+    this.mService.getRecentMovies(1).subscribe({
+      next : (data) => {
+        this.recentMovies = data
+        this.startAutoSlide('recent');
+      },
+      error : (e) => console.error(e)
+    })
 
-  /* -------- Metodo para cargar las peliculas actuales -------- */
-  loadRecentMovies() : void {
-    this.mService.getRecentMovies(this.currentPageRecent).subscribe({
-      next : (data) => this.recentMovies = data,
+    // ? ----- Popular Movies -----
+    this.mService.getPopularMovies(1).subscribe({
+      next : (data) => {
+        this.popularMovies = data
+        this.startAutoSlide('popular');
+      },
+      error : (e) => console.error(e)
+    })
+    
+    // ? ----- Upcoming Movies -----
+    this.mService.getUpcomingMovies(1).subscribe({
+      next: (data) => {
+        this.upcomingMovies = data;
+        this.startAutoSlide('upcoming');
+      },
       error : (e) => console.error(e)
     })
   }
 
-  /* -------- Metodo para cargar las peliculas actuales -------- */
-  loadPopularMovies() : void {
-    this.mService.getPopularMovies(this.currentPagePopular).subscribe({
-      next : (data) => this.popularMovies = data,
-      error : (e) => console.error(e)
-    })
+  // ! ====== Devuelve las películas visibles de un carrusel ======
+  getVisibleMovies(type: 'recent' | 'popular' | 'upcoming'): MovieBase[] {
+    const allMovies = (this as any)[`${type}Movies`] as MovieBase[];
+    const start = this.indices[type];
+    const result: MovieBase[] = [];
+
+    if (!allMovies || !allMovies.length) return result;
+
+    for (let i = 0; i < 4; i++) {
+      const idx = (start + i) % allMovies.length;
+      result.push(allMovies[idx]);
+    }
+
+    return result;
   }
 
-  /* -------- Metodo para cargar las proximas peliculas -------- */
-  loadUpcomingMovies() : void {
-    this.mService.getUpcomingMovies(this.currentPageUpcoming).subscribe({
-      next : (data) => this.upcomingMovies = data,
-      error : (e) => console.error(e)
-    })
+  // ---- Movimiento manual ----
+  nextSlide(type: 'recent' | 'popular' | 'upcoming'): void {
+    const arr = (this as any)[`${type}Movies`] as MovieBase[];
+    if (!arr?.length) return;
+    this.indices[type] = (this.indices[type] + 1) % arr.length;
   }
+
+  prevSlide(type: 'recent' | 'popular' | 'upcoming'): void {
+    const arr = (this as any)[`${type}Movies`] as MovieBase[];
+    if (!arr?.length) return;
+    this.indices[type] = (this.indices[type] - 1 + arr.length) % arr.length;
+  }
+
+  // ---- Movimiento automático ----
+  startAutoSlide(type: 'recent' | 'popular' | 'upcoming'): void {
+    if (this.autoSlides[type]) return; /* 🔹 NUEVO */
+    const arr = (this as any)[`${type}Movies`] as MovieBase[];
+    if (!arr?.length) return; /* 🔹 NUEVO */
+
+    this.autoSlides[type] = setInterval(() => this.nextSlide(type), 5000);
+  }
+
 }

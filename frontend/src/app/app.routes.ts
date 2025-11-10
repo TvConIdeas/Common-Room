@@ -8,14 +8,16 @@ import { MoviesList } from './pages/movies-list/movies-list';
 import { SearchPage } from './pages/search-page/search-page';
 
 export const routes: Routes = [
-    {path: '', component: HomePage},
-    {path: 'login', component: LoginPage},
-    {path: 'movies', component: MoviesList},
+    {path: '', component: HomePage, title:"Home | Common Room"},
+    {path: 'login', component: LoginPage, title:"Login | Common Room"},
+    
+    {path: 'movies', component: MoviesList, title:"Movies | Common Room"},
     {path: 'movies/:id', component: MovieSheet},
     {path: 'movies/search/:query', component: SearchPage},
-    {path: 'users', component: UsersList},
+    {path: 'users', component: UsersList, title:"Users | Common Room"},
     {path: 'users/:username', component: UserProfile},
-    //Cualquier otra ruta redirige a home
+
+    // ? Cualquier otra ruta redirige a home
     {path: '', redirectTo: '/', pathMatch: 'full'},
 ];
 
