@@ -1,13 +1,68 @@
-<div class="container mt-4">
+<div class="home-container">
 
-    <!-- HTML de testeo -->
-    <h2>Películas Populares</h2>
+    <!-- Logo principal -->
+    <section class="logo-section">
+        <img src="assets/img/title.png" alt="Logo" class="main-logo" />
+    </section>
 
-    <!-- Grid de películas -->
-    @for (movie of recentMovies; track movie.id) {
-        <img [src]="movie.posterUrl" alt="{{ movie.title }}">
-        <h4>{{ movie.title }}</h4>
-        <p>{{ movie.releaseDate }}</p>
-    }
+    <!-- Carrusel | Películas Recientes -->
+    <section class="carousel-section">
+        <h3>Recent Movies</h3>
+        <div class="carousel-wrapper">
+            <div class="carousel">
+                @for (movie of recentMovies; track movie.id) {
+                    <div class="movie-card">
+                        <img
+                            [src]="movie.posterUrl || 'assets/img/default-poster.jpg'"
+                            alt="{{ movie.title || 'Poster not available' }}"
+                            (error)="onImgError($event)"
+                        />
+                        <h4>{{ movie.title }}</h4>
+                        <p>{{ movie.releaseDate }}</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
 
+    <!-- Carrusel | Películas Populares -->
+    <section class="carousel-section">
+        <h3>Popular Movies</h3>
+        <div class="carousel-wrapper">
+            <div class="carousel">
+                @for (movie of popularMovies; track movie.id) {
+                    <div class="movie-card">
+                        <img
+                            [src]="movie.posterUrl || 'assets/img/default-poster.jpg'"
+                            alt="{{ movie.title || 'Poster not available' }}"
+                            (error)="onImgError($event)"
+                        />
+                        <h4>{{ movie.title }}</h4>
+                        <p>{{ movie.releaseDate }}</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrusel | Próximos Estrenos -->
+    <section class="carousel-section">
+        <h3>Upcoming Movies</h3>
+        <div class="carousel-wrapper">
+            <div class="carousel">
+                @for (movie of upcomingMovies; track movie.id) {
+                    <div class="movie-card">
+                        <img
+                            [src]="movie.posterUrl || 'assets/img/default-poster.jpg'"
+                            alt="{{ movie.title || 'Poster not available' }}"
+                            (error)="onImgError($event)"
+                        />
+                        <h4>{{ movie.title }}</h4>
+                        <p>{{ movie.releaseDate }}</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
 </div>
+
