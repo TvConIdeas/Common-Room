@@ -79,4 +79,10 @@ public class MovieController {
     public List<MoviePreviewDTO> getUpcomingMovies(@RequestParam(defaultValue = "1") int page) {
         return movieService.getUpcomingMovies(page);
     }
+
+    @GetMapping("/search/{query}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<MoviePreviewDTO> searchMovies(@PathVariable String query, @RequestParam(defaultValue = "1") int page) {
+        return movieService.searchMovies(query, page);
+    }
 }

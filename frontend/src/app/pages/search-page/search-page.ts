@@ -12,34 +12,25 @@ import { MovieService } from '../../services/movie-service';
 export class SearchPage implements OnInit{
 
   movies: MovieBase[] = []
-  searchQuery = ''
+  currentPage: number = 1
 
   constructor(
     public mService: MovieService,
-    private route: ActivatedRoute,
-    private router: RouterLink
+    private actRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const query = params.get('query')
-      if (query) {
-        this.searchQuery = query
-        this.loadMovies()
-      }
-      else {
-        console.error('No se No search query was provided. ninguna consulta de búsqueda.')
-      }
-    })
+    const searchQuery = this.actRoute.snapshot.params['query']
+    this.loadMovies(searchQuery)
   }
 
-  loadMovies() {
-    this.mService.searchMovies(this.searchQuery).subscribe({
+  loadMovies(query : string ) {
+    this.mService.searchMovies(query, this.currentPage).subscribe({
       next: (data) => {
         this.movies = data
       },
-      error: (err) => {
-        console.error('Error al cargar las películas:', err);
+      error: (e) => {
+        console.error('Error al cargar las películas:', e);
       }
     })
   }

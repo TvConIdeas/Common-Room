@@ -75,10 +75,10 @@ public class MovieService {
     // ========== BÚSQUEDA ==========
 
     ///  BARRA DE BUSQUEDA | Devuelve una lista de películas, paginadas y con la query
-    public RawMovieListDTO searchMovies(String query, int page, int pageSize) {
-        RawMovieListDTO rawList = api.searchMovies(query, page, pageSize);
+    public List<MoviePreviewDTO> searchMovies(String query, int page) {
+        RawMovieListDTO rawList = api.searchMovies(query, page);
         if (page > rawList.getTotal_pages())
             throw new PageOutOfBoundsException("This page does not exist. Max page: " + rawList.getTotal_pages());
-        return rawList;
+        return MovieMapper.rawToPreviewDTOList(rawList.getResults());
     }
 }
