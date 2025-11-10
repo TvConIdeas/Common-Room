@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import MovieBase from '../../models/MovieBase';
 import { MovieService } from '../../services/movie-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-movies-list',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './movies-list.html',
   styleUrl: './movies-list.css'
 })
@@ -13,6 +14,8 @@ export class MoviesList implements OnInit {
   movies: MovieBase[] = []
 
   currentPage = 1
+
+  public hasMorePages: boolean = false
 
   constructor(public mService: MovieService) {}
 
@@ -23,7 +26,9 @@ export class MoviesList implements OnInit {
   //Funcion para cargar las peliculas actuales
   loadMovies(): void {
     this.mService.getAllMovies(this.currentPage).subscribe({
-      next: (data) => this.movies = data,
+      next: (data) => {
+        this.movies = data,
+        this.hasMorePages = data.length === 20},
       error: (e) => console.error(e)
     })
   }
@@ -32,15 +37,22 @@ export class MoviesList implements OnInit {
 
   //Siguiente 
   nextPage(): void {
-    this.currentPage++;
-    this.loadMovies();
+    this.currentPage++
+    this.loadMovies()
+    this.scrollToTop()
   }
 
   //Anterior
   previousPage(): void {
     if (this.currentPage > 1) {
-      this.currentPage--;
-      this.loadMovies();
+      this.currentPage--
+      this.loadMovies()
+      this.scrollToTop()
     }
+  }
+
+  //Para regresar hacia arriba
+  private scrollToTop(): void {
+    window.scrollTo(0, 0)
   }
 }

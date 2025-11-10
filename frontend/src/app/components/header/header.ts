@@ -23,7 +23,7 @@ export class Header implements OnInit{
   onSearch() {
     //Comprobar que el campo no este vacio
     if(this.searchForm.valid) {
-      this.router.navigate(['/movies-list/search', this.searchForm.value.searchQuery])
+      this.router.navigate(['/movies/search', this.searchForm.value.searchQuery])
       console.log(this.searchForm.value.searchQuery)
       this.searchForm.reset()
     }

@@ -1,6 +1,6 @@
 <div>
     @for (movie of movies; track movie.id) {
-            <a [routerLink]="['/movie', movie.id]">
+            <a [routerLink]="['/movies', movie.id]">
                 <div class="movie-card">
                     <img [src]="movie.posterUrl" alt="{{movie.title}}">
                     <h4>{{movie.title}}</h4>
@@ -9,4 +9,14 @@
                 </div>
             </a>
         }
+
+    <div>
+        <button (click) = "previousPage()" 
+        [disabled]="currentPage === 1"><-</button>
+
+        <span>Page {{currentPage}}</span>
+
+        <button (click) = "nextPage()"
+        [disabled]="!hasMorePages">-></button>
+    </div>
 </div>

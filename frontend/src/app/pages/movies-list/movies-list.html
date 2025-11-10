@@ -3,12 +3,15 @@
     <h2>Welcome to the Cinema</h2>
 
     @for (movie of movies; track movie.id) {
-        <div class="movie-card">
-            <img [src]="movie.posterUrl" alt="{{movie.title}}">
-            <h4>{{movie.title}}</h4>
-            <p>{{movie.releaseDate}}</p>
-            <p>{{movie.synopsis}}</p>
-        </div>
+        <a [routerLink]="[movie.id]">
+            <div class="movie-card">
+                <img [src]="movie.posterUrl" alt="{{movie.title}}">
+                <h4>{{movie.title}}</h4>
+                <p>{{movie.releaseDate}}</p>
+                <p>{{movie.synopsis}}</p>
+            </div>
+        </a>
+
     }
 
     <div>
@@ -17,7 +20,8 @@
 
         <span>Page {{currentPage}}</span>
 
-        <button (click) = "nextPage()">-></button>
+        <button (click) = "nextPage()"
+        [disabled]="!hasMorePages">-></button>
     </div>
 
 </div>
