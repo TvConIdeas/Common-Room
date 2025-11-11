@@ -1,18 +1,11 @@
-import { Review } from "./Review";
-import { Token } from "./Token";
+import { UserBase } from "./UserBase";
 
-export interface User {
+export interface User extends UserBase{
     id: number;
-    username: string;
-    password?: string;
-    email: string;
     description?: string;
     role: Role;
     createdAt: string;
     profilePictureUrl?: string;
-
-    tokens?: Token[];
-    reviews?: Review[];
 }
 
 export enum Role {
