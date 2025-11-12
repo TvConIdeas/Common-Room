@@ -12,12 +12,12 @@ import { RouterLink } from '@angular/router';
 
 export class HomePage implements OnInit, OnDestroy{
 
-  // ! ---- Array de peliculas a mostrar ----
+  // * ---- Array de peliculas a mostrar ----
   recentMovies : MovieBase[] = [];
   popularMovies : MovieBase[] = [];
   upcomingMovies : MovieBase[] = [];
 
-  // ! ---- Estado de los carouseles ----
+  // ? ---- Estado de los carouseles ----
   indices = {
     recent: 0,
     popular: 0,
@@ -26,7 +26,7 @@ export class HomePage implements OnInit, OnDestroy{
 
   autoSlides: { [key: string]: any } = {};
 
-  // ! ====== Contructor | ngOnInit ======
+  // * ====== Contructor | ngOnInit ======
   constructor(private mService : MovieService) {}
 
   ngOnInit(): void {
@@ -89,26 +89,27 @@ export class HomePage implements OnInit, OnDestroy{
     return result;
   }
 
-  // ---- Movimiento manual ----
+  // * -------- Movimiento de los Caruseles -------- 
+  // ? ----- Next Movie -----
   nextSlide(type: 'recent' | 'popular' | 'upcoming'): void {
     const arr = (this as any)[`${type}Movies`] as MovieBase[];
     if (!arr?.length) return;
     this.indices[type] = (this.indices[type] + 1) % arr.length;
   }
 
+  // ? ----- Prev Movie -----
   prevSlide(type: 'recent' | 'popular' | 'upcoming'): void {
     const arr = (this as any)[`${type}Movies`] as MovieBase[];
     if (!arr?.length) return;
     this.indices[type] = (this.indices[type] - 1 + arr.length) % arr.length;
   }
 
-  // ---- Movimiento automático ----
+  // ? ----- Movimiento automatico -----
   startAutoSlide(type: 'recent' | 'popular' | 'upcoming'): void {
-    if (this.autoSlides[type]) return; /* 🔹 NUEVO */
+    if (this.autoSlides[type]) return;
     const arr = (this as any)[`${type}Movies`] as MovieBase[];
-    if (!arr?.length) return; /* 🔹 NUEVO */
-
-    this.autoSlides[type] = setInterval(() => this.nextSlide(type), 5000);
+    if (!arr?.length) return;
+    this.autoSlides[type] = setInterval(() => this.nextSlide(type), 4000);
   }
 
 }

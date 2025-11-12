@@ -21,6 +21,7 @@ header .logo-img {
     width: clamp(2rem, 6vw, 3.5rem);
     height: auto;
     max-height: 4rem;
+    cursor: pointer;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
@@ -57,10 +58,11 @@ header .logo-container:hover .logo-img {
     background-color: var(--green-light);
     border: none;
     border-radius: 0.25rem;
-    transition: background-color 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .search-icon:hover {
+    transform: scale(1.1);
     background-color: var(--green-plus-light);
 }
 
@@ -72,22 +74,20 @@ header .logo-container:hover .logo-img {
 }
 
 .info-container li {
+    text-decoration: none;
+    cursor: pointer;
     padding: 0.5rem 2rem;
+    font-size: 1em;
     background-color: var(--green-light);
     border-radius: 0.25rem;
     transition: all 0.3s ease;
 }
 
-.info-container a{
-    text-decoration: none;
-    color: var(--text-dark);
-}
-
 .info-container li:hover {
+    color: var(--brown-mid);
     background-color: var(--green-plus-light);
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
-
 
 /* ! ---------- Responsive ---------- */
 @media (max-width: 420px) {
