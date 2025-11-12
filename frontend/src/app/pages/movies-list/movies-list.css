@@ -1,18 +1,23 @@
 /* ? ======== Sección Titulo ======== */
 .title-section h2 {
-    background: var(--brown-gradient) -100%/ 200%;
-    background-clip: text;
-    place-self: center;
-    margin: 0.5em;
-    font-size: 4rem;
-    color: transparent;
-    animation: shimmer 3s linear infinite;
+    font-size: 5em;
+    letter-spacing: -3px;
+    transition: 0.7s ease;
+    font-variation-settings: "wght" 311;
+    margin-bottom: 0.8rem;
+    color: var(--brown-dark);
+    outline: none;
+    text-align: center;
+    text-shadow:
+    1px 3px 0 black, /* Lado inferior */
+    -1px -1px 0 black, /* Lado superior */
+    1px -1px 0 black, /* Lado superior derecho */
+    -1px 1px 0 black; /* Lado superior izquierdo */
 }
 
-@keyframes shimmer {
-    to {
-        background-position: 100%
-    }
+.title-section h2:hover {
+    font-variation-settings: "wght" 582; 
+    letter-spacing: 1px;
 }
 
 /* ? ======== Sección Peliculas ======== */
@@ -99,6 +104,49 @@
     left: 0px;
     clip-path: circle(75%);
     transition: all .5s ease-in-out;
+}
+
+/* ? ======== Botones para la paginacion ======== */
+.pagination-section {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.pagination-section span {
+    color: var(--text-light);
+    background-color: var(--green-mid);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 1.2rem;
+    align-self: center;
+    user-select: none;
+}
+
+.pagination-section button {
+    background-color: var(--green-mid);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: var(--text-light);
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/*? --- Efecto Hover ---*/
+.pagination-section button:hover {
+    background-color: var(--brown-mid);
+    transform: scale(1.1);
+}
+.pagination-section button:disabled {
+    background-color: var(--green-light);
+    cursor: not-allowed;
+}
+.pagination-section button:disabled:hover {
+    transform: none;
 }
 
 /* ! ======== Responsive ======== */

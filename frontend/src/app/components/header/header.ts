@@ -11,6 +11,7 @@ import { Router, RouterLink } from '@angular/router';
 export class Header implements OnInit{
 
   searchForm !: FormGroup
+  isLogging : boolean = false;
 
   constructor(private router : Router, private fb : FormBuilder) {}
 

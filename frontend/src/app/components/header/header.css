@@ -1,13 +1,14 @@
 /* * ============ Header ============ */
 header {
     z-index: 10;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    gap: 0.625rem;
-    padding: 1% 1.25%;
+    padding: 1rem;
     background-color: var(--green-dark);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 /* ? ---------- Logo ---------- */
@@ -70,19 +71,23 @@ header .logo-container:hover .logo-img {
     list-style: none;
 }
 
-.info-container a {
+.info-container li {
     padding: 0.5rem 2rem;
-    color: var(--text-dark);
-    text-decoration: none;
     background-color: var(--green-light);
+    border-radius: 0.25rem;
     transition: all 0.3s ease;
 }
 
-.info-container a:hover {
-    color: var(--brown-dark);
-    background-color: var(--green-plus-light);
-    transform: scale(1.5);
+.info-container a{
+    text-decoration: none;
+    color: var(--text-dark);
 }
+
+.info-container li:hover {
+    background-color: var(--green-plus-light);
+    transform: scale(1.2);
+}
+
 
 /* ! ---------- Responsive ---------- */
 @media (max-width: 420px) {

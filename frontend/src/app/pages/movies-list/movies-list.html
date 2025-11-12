@@ -4,7 +4,7 @@
     <section class="title-section">
         <h2>Welcome to the Cinema</h2>
     </section>
-
+    
     <!-- * ========== Listado de Peliculas ========== -->
     <section class="movies-section">
         @for (movie of movies; track movie.id) {
@@ -27,14 +27,14 @@
     </section>
 
     <!-- * ========== Botones de paginacion ========== -->
-    <div>
+    <section class="pagination-section">
         <button (click) = "previousPage()" 
-        [disabled]="currentPage === 1"><-</button>
+        [disabled]="currentPage === 1">←</button>
 
         <span>Page {{currentPage}}</span>
 
         <button (click) = "nextPage()"
-        [disabled]="!hasMorePages">-></button>
-    </div>
+        [disabled]="!hasMorePages">→</button>
+    </section>
 
 </div>

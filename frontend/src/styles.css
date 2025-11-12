@@ -7,7 +7,7 @@
   
   /* Degradados */
   --green-gradient: linear-gradient(135deg, #9cab86 0%, #3b5445 100%);
-  --brown-gradient: linear-gradient(135deg, #766153 0%, #51443B 100%);
+  --brown-gradient: linear-gradient(135deg, #bb9f8c 0%, #766153 100%);
 
   /* ===== Marrones ===== */
   --brown-dark: #51443B;
@@ -26,6 +26,7 @@
 }
 
 body {
-  background: var(--green-gradient);
-  color: #f0f0f0;
+  /* background: var(--green-gradient); */
+  background-image: url('/assets/img/background-page.jpg');
+  background-position: center;
 }
