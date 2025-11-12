@@ -41,7 +41,7 @@ export class MoviesList implements OnInit {
     this.scrollToTop();
   }
 
-  // ? ----- Next Previous -----
+  // ? ----- Previous Page -----
   previousPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;
