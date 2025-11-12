@@ -1,19 +1,32 @@
-<div class="container movie-list">
+<div class="movies-container">
 
-    <h2>Welcome to the Cinema</h2>
+    <!-- * ========== Titulo ========== -->
+    <section class="title-section">
+        <h2>Welcome to the Cinema</h2>
+    </section>
 
-    @for (movie of movies; track movie.id) {
-        <a [routerLink]="[movie.id]">
-            <div class="movie-card">
-                <img [src]="movie.posterUrl" alt="{{movie.title}}">
-                <h4>{{movie.title}}</h4>
-                <p>{{movie.releaseDate}}</p>
-                <p>{{movie.synopsis}}</p>
+    <!-- * ========== Listado de Peliculas ========== -->
+    <section class="movies-section">
+        @for (movie of movies; track movie.id) {
+            <div class="movie-card" [routerLink]="[movie.id]">
+                <div class="img-wrapper">
+                    <img
+                        [src]="movie.posterUrl || 'assets/img/default-poster.jpg'"
+                        alt="{{ movie.title || 'Poster not available' }}"
+                        (error)="onImgError($event)"
+                    />
+
+                    <div class="info-overlay">
+                        <h1>{{ movie.title }}</h1>
+                        <h3>{{movie.releaseDate}}</h3>
+                        <p>{{ movie.synopsis }}</p>
+                    </div>
+                </div>
             </div>
-        </a>
+        }
+    </section>
 
-    }
-
+    <!-- * ========== Botones de paginacion ========== -->
     <div>
         <button (click) = "previousPage()" 
         [disabled]="currentPage === 1"><-</button>

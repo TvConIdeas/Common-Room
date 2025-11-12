@@ -55,4 +55,10 @@ export class MoviesList implements OnInit {
   private scrollToTop(): void {
     window.scrollTo(0, 0)
   }
+
+  // * -------- Metodo para reemplazar posters sin imagen -------- 
+  onImgError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/img/default-poster.jpg';
+  }
 }
