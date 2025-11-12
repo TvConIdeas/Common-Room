@@ -1,1 +1,25 @@
-<p>users-list works!</p>
+<div class="container user-list">
+
+    <h2>Users</h2>
+
+    @for (user of users; track user.id) {
+        <a [routerLink]="[user.id]">
+            <div class="user-card">
+                <img [src]="user.profilePictureUrl" alt="{{user.username}}">
+                <h4>{{user.username}}</h4>
+                <p>{{user.role}}</p>
+            </div>
+        </a>
+
+    }
+
+    <div>
+        <button (click) = "previousPage()" 
+        [disabled]="currentPage === 1"><-</button>
+
+        <span>Page {{currentPage}}</span>
+        
+        <button (click) = "nextPage()">-></button>
+    </div>
+
+</div>
