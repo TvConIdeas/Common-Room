@@ -3,3 +3,10 @@
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
 }
+
+main {
+    margin-left: 5em;
+    margin-top: 5em; 
+    padding: 1rem;
+    transition: margin-left 0.35s ease;
+}
