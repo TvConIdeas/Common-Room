@@ -15,6 +15,6 @@ export class UserService {
   //Obtengo la lista de usuarios
   //Observable sirve para representar un valor que llegará en el futuro (asincrono)
   getUsers(): Observable<UserPreview[]> {
-    return this.http.get<UserPreview[]>('${this.URL}/all')
+    return this.http.get<UserPreview[]>(`${this.URL}/all`)
   }
 }

@@ -2,7 +2,8 @@
 
     <h2>Users</h2>
 
-    @for (user of users; track user.id) {
+
+    @for (user of pagedUsers; track user.id) {
         <a [routerLink]="[user.id]">
             <div class="user-card">
                 <img [src]="user.profilePictureUrl" alt="{{user.username}}">
@@ -10,16 +11,18 @@
                 <p>{{user.role}}</p>
             </div>
         </a>
-
+    }
+    @empty {
+        <p>No users found.</p>
     }
 
     <div>
         <button (click) = "previousPage()" 
         [disabled]="currentPage === 1"><-</button>
 
-        <span>Page {{currentPage}}</span>
+        <span>Page {{currentPage}} of {{totalPages()}}</span>
         
-        <button (click) = "nextPage()">-></button>
+        <button (click) = "nextPage()"
+        [disabled]="currentPage === totalPages()">-></button>
     </div>
-
 </div>
