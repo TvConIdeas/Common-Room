@@ -19,7 +19,7 @@ export class UsersList implements OnInit{
 
   itemsPerPage = 10
 
-  constructor(private uService: UserService){}
+  constructor(public uService: UserService){}
 
   ngOnInit(): void {
     this.loadUsers()

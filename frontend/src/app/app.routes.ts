@@ -15,6 +15,7 @@ export const routes: Routes = [
     {path: 'movies/search/:query', component: SearchPage},
     {path: 'users', component: UsersList},
     {path: 'users/:username', component: UserProfile},
+    {path: 'users/me', component: UserProfile},
     //Cualquier otra ruta redirige a home
     {path: '', redirectTo: '/', pathMatch: 'full'},
 ];

@@ -4,7 +4,7 @@
 
 
     @for (user of pagedUsers; track user.id) {
-        <a [routerLink]="[user.id]">
+        <a [routerLink]="[user.username]">
             <div class="user-card">
                 <img [src]="user.profilePictureUrl" alt="{{user.username}}">
                 <h4>{{user.username}}</h4>
