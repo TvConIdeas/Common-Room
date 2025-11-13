@@ -5,6 +5,7 @@ import TokenResponse from '../models/TokenResponse';
 import { RegisterRequest } from '../models/RegisterRequest';
 import { Token } from '@angular/compiler';
 import { LoginRequest } from '../models/LoginRequest';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,9 @@ import { LoginRequest } from '../models/LoginRequest';
 export class AuthService {
   private API_URL = 'http://localhost:8080/auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, 
+    private router: Router
+  ) {}
 
   login(user: LoginRequest): Observable<TokenResponse> {
     return this.http.post<TokenResponse>(`${this.API_URL}/login`, user).pipe(
@@ -28,6 +31,14 @@ export class AuthService {
         this.saveTokens(res)
       })
     );
+  }
+
+  logout(){
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('refresh_token')
+    localStorage.removeItem('username')
+    localStorage.removeItem('role')
+    this.router.navigate(['/'])
   }
 
   saveTokens(response: TokenResponse) {
