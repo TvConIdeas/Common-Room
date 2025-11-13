@@ -1,0 +1,6 @@
+@if (errorMessage$ | async; as message){
+    <div class="error-toast">
+        <span>{{message}}</span>
+        <button class="close-btn" (click)="onClose()">X</button>
+    </div>
+}

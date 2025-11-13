@@ -1,0 +1,18 @@
+.error-toast {
+  position: fixed; 
+  bottom: 20px;
+  right: 20px;
+  background-color: #D32F2F;
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  
+  /* ESTA ES LA LÍNEA CLAVE */
+  z-index: 9999; /* Pon un número muy alto para ganarle a todo */
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 250px;
+}
