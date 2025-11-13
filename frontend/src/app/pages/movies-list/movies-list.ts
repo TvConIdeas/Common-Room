@@ -7,52 +7,57 @@ import { RouterLink } from '@angular/router';
   selector: 'app-movies-list',
   imports: [RouterLink],
   templateUrl: './movies-list.html',
-  styleUrl: './movies-list.css'
+  styleUrl: './movies-list.css',
 })
 export class MoviesList implements OnInit {
 
-  movies: MovieBase[] = []
+  // * ======== Variables ========
+  movies: MovieBase[] = [];
+  currentPage = 1;
+  public hasMorePages: boolean = false;
 
-  currentPage = 1
-
-  public hasMorePages: boolean = false
-
+  // * ======== Contructor | ngOnInit ========
   constructor(public mService: MovieService) {}
 
   ngOnInit(): void {
     this.loadMovies();
   }
 
-  //Funcion para cargar las peliculas actuales
+  // ! -------- Metodo para cargar peliculas -------- 
   loadMovies(): void {
     this.mService.getAllMovies(this.currentPage).subscribe({
       next: (data) => {
-        this.movies = data,
-        this.hasMorePages = data.length === 20},
-      error: (e) => console.error(e)
-    })
+        (this.movies = data), (this.hasMorePages = data.length === 20);
+      },
+      error: (e) => console.error(e),
+    });
   }
 
-  //Funciones para cambiar de pagina
-
-  //Siguiente 
+  // ! ====== Metodos para la Paginacion ======
+  // ? ----- Next Page -----
   nextPage(): void {
-    this.currentPage++
-    this.loadMovies()
-    this.scrollToTop()
+    this.currentPage++;
+    this.loadMovies();
+    this.scrollToTop();
   }
 
-  //Anterior
+  // ? ----- Previous Page -----
   previousPage(): void {
     if (this.currentPage > 1) {
-      this.currentPage--
-      this.loadMovies()
-      this.scrollToTop()
+      this.currentPage--;
+      this.loadMovies();
+      this.scrollToTop();
     }
   }
 
-  //Para regresar hacia arriba
+  // ? ----- Metodo para volver hacia arriba -----
   private scrollToTop(): void {
-    window.scrollTo(0, 0)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // * -------- Metodo para reemplazar posters sin imagen --------
+  onImgError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/img/default-poster.jpg';
   }
 }

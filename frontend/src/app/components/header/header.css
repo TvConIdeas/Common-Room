@@ -1,13 +1,22 @@
 /* * ============ Header ============ */
 header {
-    z-index: 10;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    gap: 0.625rem;
-    padding: 1% 1.25%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: auto;
+    z-index: 100;
     background-color: var(--green-dark);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.header-container {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 100%;
 }
 
 /* ? ---------- Logo ---------- */
@@ -20,6 +29,7 @@ header .logo-img {
     width: clamp(2rem, 6vw, 3.5rem);
     height: auto;
     max-height: 4rem;
+    cursor: pointer;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
@@ -32,7 +42,7 @@ header .logo-container:hover .logo-img {
 .search-container {
     display: flex;
     align-items: center;
-    width: 80%;
+    width: 60%;
     gap: 0.75rem;
 }
 
@@ -56,10 +66,11 @@ header .logo-container:hover .logo-img {
     background-color: var(--green-light);
     border: none;
     border-radius: 0.25rem;
-    transition: background-color 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .search-icon:hover {
+    transform: scale(1.1);
     background-color: var(--green-plus-light);
 }
 
@@ -70,18 +81,20 @@ header .logo-container:hover .logo-img {
     list-style: none;
 }
 
-.info-container a {
-    padding: 0.5rem 2rem;
-    color: var(--text-dark);
+.info-container li {
     text-decoration: none;
+    cursor: pointer;
+    padding: 0.5rem 2rem;
+    font-size: 1em;
     background-color: var(--green-light);
+    border-radius: 0.25rem;
     transition: all 0.3s ease;
 }
 
-.info-container a:hover {
-    color: var(--brown-dark);
+.info-container li:hover {
+    color: var(--brown-mid);
     background-color: var(--green-plus-light);
-    transform: scale(1.5);
+    transform: scale(1.1);
 }
 
 /* ! ---------- Responsive ---------- */

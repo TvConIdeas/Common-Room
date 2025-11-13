@@ -10,8 +10,11 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class Header implements OnInit{
 
+  // * ---- Variables----
   searchForm !: FormGroup
+  isLogging : boolean = false;
 
+  // * ====== Contructor | ngOnInit ======
   constructor(private router : Router, private fb : FormBuilder) {}
 
   ngOnInit(): void {
@@ -20,8 +23,8 @@ export class Header implements OnInit{
     })
   }
 
+  // * -------- Metodo para la barra de busqueda -------- 
   onSearch() {
-    //Comprobar que el campo no este vacio
     if(this.searchForm.valid) {
       this.router.navigate(['/movies/search', this.searchForm.value.searchQuery])
       console.log(this.searchForm.value.searchQuery)

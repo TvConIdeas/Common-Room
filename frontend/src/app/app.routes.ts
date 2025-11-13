@@ -11,15 +11,16 @@ import { RegisterPage } from './pages/register-page/register-page';
 import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
-    {path: '', component: HomePage},
-    {path: 'login', component: LoginPage, canActivate: [guestGuard]},
-    {path: 'register', component: RegisterPage, canActivate: [guestGuard]},
-    {path: 'movies', component: MoviesList},
+    {path: '', component: HomePage, title:"Home | Common Room"},
+    {path: 'login', component: LoginPage, title:"Login | Common Room", canActivate: [guestGuard]},
+    {path: 'register', component: RegisterPage, title:"Register | Common Room", canActivate: [guestGuard]},
+    {path: 'movies', component: MoviesList, title:"Movies | Common Room"},
     {path: 'movies/:id', component: MovieSheet},
     {path: 'movies/search/:query', component: SearchPage},
-    {path: 'users', component: UsersList},
+    {path: 'users', component: UsersList, title:"Users | Common Room"},
     {path: 'users/:username', component: UserProfile},
     {path: 'users/me', component: UserProfile},
+  
     //Cualquier otra ruta redirige a home
     {path: '', redirectTo: '/', pathMatch: 'full'},
 ];
