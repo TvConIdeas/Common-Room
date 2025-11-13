@@ -1,0 +1,48 @@
+<form [formGroup]="loginForm" (submit)="onSubmit()">
+    <div>
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="usernameIn">
+
+        @if(loginForm.get('usernameIn')?.touched && loginForm.get('usernameIn')?.hasError('required')){
+            <p>Username is required.</p>
+        } @else if ((loginForm.get('usernameIn')?.hasError('minlength') || loginForm.get('usernameIn')?.hasError('maxlength')) 
+        && loginForm.get('usernameIn')?.touched) {
+            <p>Username must be between 5 and 20 characters.</p>
+        }
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="passwordIn">
+
+        @if(loginForm.get('passwordIn')?.touched && loginForm.get('passwordIn')?.hasError('required')){
+            <p>Password is required.</p>
+        } @else if (loginForm.get('passwordIn')?.hasError('minlength') && loginForm.get('passwordIn')?.touched) {
+            <p>Password must be at least 8 characters long.</p>
+        }
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="emailIn">
+
+        @if(loginForm.get('emailIn')?.touched && loginForm.get('emailIn')?.hasError('required')){
+            <p>Email is required.</p>
+        } @else if (loginForm.get('emailIn')?.hasError('maxlength') && loginForm.get('emailIn')?.touched) {
+            <p>Email cannot be longer than 50 characters.</p>
+        } @else if (loginForm.get('emailIn')?.hasError('email') && loginForm.get('emailIn')?.touched) {
+            <p>Enter a valid email address.</p>
+        }
+    </div>
+    <div>
+        <label for="picture">Profile Picture</label>
+        <input type="url" id="picture" formControlName="pictureIn">
+
+        @if(loginForm.get('pictureIn')?.touched && loginForm.get('pictureIn')?.hasError('pattern')){
+            <p>Enter a valid URL (e.g. https://example.com).</p>
+        }
+    </div>
+    <button type="submit" [disabled]="loginForm.invalid">Register</button>
+    <p>
+        Already have an account?
+        <a routerLink="/login">Login</a>
+    </p>
+</form>

@@ -2,7 +2,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthService } from '../services/auth-service';
 
-// Interceptor. Se va a ejecutar antes de cada petición
+// Interceptor -> Se va a ejecutar antes de cada petición para agregar el token (si es que hay)
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService) // inyecto el AUthService
   const token = authService.getAccessToken() // obtenemos el token (si es que hay) guardado en el local storage

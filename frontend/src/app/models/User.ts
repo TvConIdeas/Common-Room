@@ -1,14 +1,14 @@
-import { UserBase } from "./UserBase";
-
-export interface User extends UserBase{
-    id: number;
-    description?: string;
-    role: Role;
-    createdAt: string;
-    profilePictureUrl?: string;
+export interface User {
+  id?: number;
+  username: string;
+  email?: string;
+  profilePictureUrl?: string;
+  description?: string;
+  role?: Role;
+  createdAt?: string;
 }
 
 export enum Role {
-    USER = 'USER',
-    ADMIN = 'ADMIN'
+  USER = 'USER',
+  ADMIN = 'ADMIN',
 }
