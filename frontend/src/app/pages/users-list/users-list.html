@@ -1,1 +1,28 @@
-<p>users-list works!</p>
+<div class="container user-list">
+
+    <h2>Users</h2>
+
+
+    @for (user of pagedUsers; track user.id) {
+        <a [routerLink]="[user.username]">
+            <div class="user-card">
+                <img [src]="user.profilePictureUrl" alt="{{user.username}}">
+                <h4>{{user.username}}</h4>
+                <p>{{user.role}}</p>
+            </div>
+        </a>
+    }
+    @empty {
+        <p>No users found.</p>
+    }
+
+    <div>
+        <button (click) = "previousPage()" 
+        [disabled]="currentPage === 1"><-</button>
+
+        <span>Page {{currentPage}} of {{totalPages()}}</span>
+        
+        <button (click) = "nextPage()"
+        [disabled]="currentPage === totalPages()">-></button>
+    </div>
+</div>

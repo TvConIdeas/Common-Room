@@ -1,1 +1,8 @@
-<p>user-profile works!</p>
+@if(selectedUser){
+    <img src="{{selectedUser.profilePictureUrl}}" alt="{{selectedUser.username}}" />
+    <h3>{{selectedUser.username}}</h3>
+    <h4>{{selectedUser.description}}</h4>
+}
+@else{
+    <h3>User not found</h3>
+}
