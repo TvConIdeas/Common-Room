@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import UserPreview from '../models/UserPreview';
 import { Observable } from 'rxjs';
-import UserProfileI from '../models/UserProfileI';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +20,12 @@ export class UserService {
   }
 
   //Perfil público
-  getUserProfile(username: string): Observable<UserProfileI>{
-    return this.http.get<UserProfileI>(`${this.URL}/${username}`)
+  getUserProfile(username: string): Observable<User>{
+    return this.http.get<User>(`${this.URL}/${username}`)
   }
 
   //Perfil propio
-  getMyProfile(): Observable<UserProfileI>{
-    return this.http.get<UserProfileI>(`${this.URL}/me`)
+  getMyProfile(): Observable<User>{
+    return this.http.get<User>(`${this.URL}/me`)
   }
 }

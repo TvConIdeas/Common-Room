@@ -1,6 +1,6 @@
-import { Role } from "./User"
+import { Role, User } from "./User"
 
-export default interface UserPreview {
+export default interface UserPreview extends User{
     id: number
     username: string
     profilePictureUrl?: string

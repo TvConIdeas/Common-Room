@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import UserProfileI from '../../models/UserProfileI';
 import { UserService } from '../../services/user-service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,7 +11,7 @@ import { switchMap } from 'rxjs';
   styleUrl: './user-profile.css'
 })
 export class UserProfile implements OnInit{
-  selectedUser: UserProfileI | null = null
+  selectedUser: User | null = null
   isMyProfile = false
 
   constructor(private route: ActivatedRoute, public uService: UserService) {}
