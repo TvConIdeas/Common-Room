@@ -3,13 +3,13 @@
 ---
 ## ✒️ Autores
 
-- **Delfina Fenoy Rivas**
-- **Ian Francano**
-- **Lola Pérez**
+- **Delfina Fenoy Rivas.**
+- **Ian Francano.**
+- **Lola Pérez.**
 
 ---
 
-**Common Room** es una red social web pensada para personas apasionadas por el cine. Desarrollada como aplicación full-stack con **Java y Spring Boot**, permite a los usuarios compartir reseñas, puntuar películas, armar listas personalizadas y descubrir recomendaciones a través de una comunidad interactiva.
+**Common Room** es una red social web pensada para personas apasionadas por el cine. Desarrollada como aplicación full-stack con **Java + Spring Boot y Angular 20**, permite a los usuarios compartir reseñas, puntuar películas, armar listas personalizadas y descubrir recomendaciones a través de una comunidad interactiva.
 
 ---
 
@@ -52,9 +52,9 @@ Este sistema busca brindar un entorno social, simple e intuitivo, donde los cin�
 - **Lombok**
 
 ### Frontend
-- **Thymeleaf**
-- **HTML + CSS (custom sin frameworks)**
-- **JavaScript** (interacción básica)
+- **Angular 20**
+- **HTML + CSS**
+- **TypeScript**
 
 ### API externa
 - [TheMovieDB](https://www.themoviedb.org/) – para datos dinámicos de películas
@@ -75,6 +75,14 @@ Entre las más relevantes se incluyen:
 - `mysql-connector-j` → Conexión a base de datos.
 - `lombok` → Reducción de boilerplate.
 
+Las dependencias principales del proyecto de Angular incluyen:
+
+- @angular/core → Núcleo del framework.
+- @angular/common → Directivas y pipes comunes.
+- @angular/router → Para la navegación y enrutamiento en la SPA.
+- @angular/common/http → Cliente HTTP para la comunicación con la API.
+- rxjs → Manejo de observables y programación reactiva.
+
 ---
 
 ## ✅ Requisitos Funcionales Destacados
@@ -94,7 +102,7 @@ Entre las más relevantes se incluyen:
 
 - Aplicación web con arquitectura **cliente-servidor**.
 - Backend expone una **API REST** y gestiona seguridad, lógica y persistencia.
-- Frontend renderizado en el servidor con Thymeleaf.
+- Frontend una "Single Page Application" construida con Angular 20. Se ejecuta completamente en el navegador del cliente.
 - Integración con servicios externos (TheMovieDB) y base de datos relacional.
 
 ---
@@ -109,12 +117,11 @@ Entre las más relevantes se incluyen:
 
 ## 🏫 Contexto Académico
 
-Este proyecto fue desarrollado en el marco de la **Tecnicatura Universitaria en Programación** en la **Universidad Tecnológica Nacional (UTN) – Facultad Regional Mar del Plata**, como trabajo final integrador de las materias Programación III y Metodología de Sistemas I.
+Este proyecto fue desarrollado en el marco de la **Tecnicatura Universitaria en Programación** en la **Universidad Tecnológica Nacional (UTN) – Facultad Regional Mar del Plata**, como trabajo final integrador de la materia Programación IV.
 
-Fecha de entrega: **9 de junio de 2025**  
+Fecha de entrega: **14 de noviembre de 2025**  
 Docentes: 
-- **Sofía Galbato**
-- **Rodrigo Soto**
+- **Lucrecia Bazán**
 
 ---
 
