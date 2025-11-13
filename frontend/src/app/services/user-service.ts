@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import UserPreview from '../models/UserPreview';
 import { Observable } from 'rxjs';
 import { User } from '../models/User';
+import TokenResponse from '../models/TokenResponse';
+import ChangePassword from '../models/ChangePassword';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +29,21 @@ export class UserService {
   //Perfil propio
   getMyProfile(): Observable<User>{
     return this.http.get<User>(`${this.URL}/me`)
+  }
+
+  //Modificar perfil propio
+  //El backend devueleve un TokenResponse si se modifica el username
+  updateUser(username: string, dto: User): Observable<TokenResponse | void>{
+    return this.http.put<TokenResponse | void>(`${this.URL}/${username}`, dto)
+  }
+
+  //Cambiar contraseña
+  changePassword(username: string, dto: ChangePassword): Observable<void>{
+    return this.http.put<void>(`${this.URL}/${username}/password`, dto)
+  }
+
+  //Eliminar perfil
+  deleteUser(username: string): Observable<void>{
+    return this.http.delete<void>(`${this.URL}/${username}`)
   }
 }
