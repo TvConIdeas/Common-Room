@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import UserPreview from '../../models/UserPreview';
 import { UserService } from '../../services/user-service';
 import { RouterLink } from '@angular/router';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-users-list',
-  imports: [RouterLink, NgxPaginationModule],
+  imports: [RouterLink],
   templateUrl: './users-list.html',
   styleUrl: './users-list.css'
 })
