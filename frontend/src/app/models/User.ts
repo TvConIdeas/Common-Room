@@ -1,21 +1,14 @@
-import { Review } from "./Review";
-import { Token } from "./Token";
-
 export interface User {
-    id: number;
-    username: string;
-    password?: string;
-    email: string;
-    description?: string;
-    role: Role;
-    createdAt: string;
-    profilePictureUrl?: string;
-
-    tokens?: Token[];
-    reviews?: Review[];
+  id?: number;
+  username: string;
+  email?: string;
+  profilePictureUrl?: string;
+  description?: string;
+  role?: Role;
+  createdAt?: string;
 }
 
 export enum Role {
-    USER = 'USER',
-    ADMIN = 'ADMIN'
+  USER = 'USER',
+  ADMIN = 'ADMIN',
 }
