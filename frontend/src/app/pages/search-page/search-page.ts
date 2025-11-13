@@ -11,15 +11,14 @@ import { Subscription } from 'rxjs';
   styleUrl: './search-page.css'
 })
 export class SearchPage implements OnInit, OnDestroy{
-
+  
+  // * ======== Variables ========
   movies: MovieBase[] = []
   currentPage: number = 1
-
   public hasMorePages: boolean = false
-
-  // Variable para suscripcion a cambios en la ruta
   private routeSubscription !: Subscription
 
+  // * ======== Contructor | ngOnInit | ngOnDestroy ========
   constructor(
     public mService: MovieService,
     private actRoute: ActivatedRoute
@@ -39,6 +38,14 @@ export class SearchPage implements OnInit, OnDestroy{
     })
   }
 
+  // Desuscribirse cuando el componente se destruye
+  ngOnDestroy(): void {
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe()
+    }
+  }
+
+  // ! -------- Metodo para cargar peliculas -------- 
   loadMovies(query: string) {
     this.mService.searchMovies(query, this.currentPage).subscribe({
       next: (data) => {
@@ -51,23 +58,15 @@ export class SearchPage implements OnInit, OnDestroy{
     })
   }
 
-  // Desuscribirse cuando el componente se destruye
-  ngOnDestroy(): void {
-    if (this.routeSubscription) {
-      this.routeSubscription.unsubscribe()
-    }
-  }
-
-    //Funciones para cambiar de pagina
-
-  //Siguiente 
+  // ! ====== Metodos para la Paginacion ======
+  // ? ----- Next Page -----
   nextPage(): void {
     this.currentPage++
     this.loadMovies(this.actRoute.snapshot.params['query'])
     this.scrollToTop()
   }
 
-  //Anterior
+  // ? ----- Previous Page -----
   previousPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--
@@ -76,8 +75,14 @@ export class SearchPage implements OnInit, OnDestroy{
     }
   }
 
-  //Para regresar hacia arriba
+  // ? ----- Metodo para volver hacia arriba -----
   private scrollToTop(): void {
-    window.scrollTo(0, 0)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // * -------- Metodo para reemplazar posters sin imagen --------
+  onImgError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/img/default-poster.jpg';
   }
 }
