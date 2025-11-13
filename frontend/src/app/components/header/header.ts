@@ -1,6 +1,7 @@
 import { Component, OnInit,  } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-header',
@@ -9,15 +10,20 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './header.css'
 })
 export class Header implements OnInit{
-
   // * ---- Variables----
   searchForm !: FormGroup
-  isLogging : boolean = false;
+  isLoggedIn : boolean = false;
 
   // * ====== Contructor | ngOnInit ======
-  constructor(private router : Router, private fb : FormBuilder) {}
+  constructor(
+    private router : Router, 
+    private fb : FormBuilder,
+    private auth : AuthService
+  ) {}
 
   ngOnInit(): void {
+    this.isLoggedIn = this.auth.isLoggedIn()
+
     this.searchForm = this.fb.group({
       searchQuery: ['', Validators.required]
     })
@@ -31,4 +37,6 @@ export class Header implements OnInit{
       this.searchForm.reset()
     }
   }
+
+
 }
