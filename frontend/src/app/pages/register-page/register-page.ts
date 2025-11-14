@@ -29,6 +29,7 @@ export class RegisterPage implements OnInit{
   onSubmit(){
     this.auth.register(this.registerForm.value).subscribe({
       next: (data) => {
+        alert('Registration successful!')
         this.registerForm.reset()
         this.router.navigate(['/'])
       },
