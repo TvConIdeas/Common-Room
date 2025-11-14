@@ -81,12 +81,13 @@
 }
 
 .user-card:hover .info-overlay {
-    background: linear-gradient(180deg, transparent 0%, var(--brown-light) 100%);
+    background: var(--brown-mid);
+    border-radius: 0rem;
 }
 
 .user-card:hover .info-overlay h1{
-    color: var(--text-dark);
     transform: scale(1.05);
+    text-decoration: underline;
 }
 
 .info-overlay h1 {
