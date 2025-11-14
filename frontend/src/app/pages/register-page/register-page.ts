@@ -30,6 +30,7 @@ export class RegisterPage implements OnInit{
     this.auth.register(this.registerForm.value).subscribe({
       next: (data) => {
         this.registerForm.reset()
+        console.log(this.registerForm.value)
         this.router.navigate(['/'])
       },
       error: (e) => {console.error(e)}
