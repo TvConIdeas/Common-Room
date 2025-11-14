@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import UserPreview from '../models/UserPreview';
 import { Observable } from 'rxjs';
 import { User } from '../models/User';
+import { RegisterRequest } from '../models/RegisterRequest';
 
 @Injectable({
   providedIn: 'root'

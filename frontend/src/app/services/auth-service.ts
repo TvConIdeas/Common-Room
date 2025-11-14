@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import TokenResponse from '../models/TokenResponse';
 import { RegisterRequest } from '../models/RegisterRequest';
 import { Token } from '@angular/compiler';
@@ -12,33 +12,42 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private API_URL = 'http://localhost:8080/auth';
+  private loggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn()); // guarda el estado actual (logueado o no)
+  loggedIn$ = this.loggedInSubject.asObservable(); // observable que otros componentes (como el header) pueden escuchar
 
-  constructor(private http: HttpClient, 
-    private router: Router
-  ) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(user: LoginRequest): Observable<TokenResponse> {
     return this.http.post<TokenResponse>(`${this.API_URL}/login`, user).pipe(
       tap((res) => {
         this.saveTokens(res);
+        this.loggedInSubject.next(true); // avisa a quienes estan suscriptos los cambios de logueo del usuario
       })
     );
   }
 
   register(user: RegisterRequest): Observable<TokenResponse> {
+    console.log(user);
     return this.http.post<TokenResponse>(`${this.API_URL}/register`, user).pipe(
       tap((res) => {
-        this.saveTokens(res)
+        this.saveTokens(res);
+        this.loggedInSubject.next(true);
       })
     );
   }
 
-  logout(){
-    localStorage.removeItem('access_token')
-    localStorage.removeItem('refresh_token')
-    localStorage.removeItem('username')
-    localStorage.removeItem('role')
-    this.router.navigate(['/'])
+  logout() {
+    this.http.post<void>('http://localhost:8080/logout', {}).subscribe({
+      next: () => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('username');
+        localStorage.removeItem('role');
+        this.loggedInSubject.next(false);
+        this.router.navigate(['/']);
+      },
+      error: (e) => console.error(e)
+    });
   }
 
   saveTokens(response: TokenResponse) {
