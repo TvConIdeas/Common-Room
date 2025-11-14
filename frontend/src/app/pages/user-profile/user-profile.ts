@@ -41,7 +41,7 @@ export class UserProfile implements OnInit{
     this.editProfileForm = this.fb.group({
       username:['',  [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
       email:['', [Validators.required, Validators.maxLength(50), Validators.email]],
-      profilePictureUrl:[''],
+      profilePictureUrl:['', Validators.pattern(/^(https?:\/\/)?([\w\-]+\.)+[a-z]{2,6}(:\d+)?(\/[^\s]*)?$/i)],
       description: ['', Validators.maxLength(255)]
     })
 
