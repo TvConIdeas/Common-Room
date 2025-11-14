@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import TokenResponse from '../models/TokenResponse';
 import { RegisterRequest } from '../models/RegisterRequest';
 import { Token } from '@angular/compiler';
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private API_URL = 'http://localhost:8080/auth';
+  private loggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn()); // guarda el estado actual (logueado o no)
+  loggedIn$ = this.loggedInSubject.asObservable(); // observable que otros componentes (como el header) pueden escuchar
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -19,6 +21,7 @@ export class AuthService {
     return this.http.post<TokenResponse>(`${this.API_URL}/login`, user).pipe(
       tap((res) => {
         this.saveTokens(res);
+        this.loggedInSubject.next(true); // avisa a quienes estan suscriptos los cambios de logueo del usuario
       })
     );
   }
@@ -28,6 +31,7 @@ export class AuthService {
     return this.http.post<TokenResponse>(`${this.API_URL}/register`, user).pipe(
       tap((res) => {
         this.saveTokens(res);
+        this.loggedInSubject.next(true);
       })
     );
   }
@@ -39,6 +43,7 @@ export class AuthService {
         localStorage.removeItem('refresh_token');
         localStorage.removeItem('username');
         localStorage.removeItem('role');
+        this.loggedInSubject.next(false);
         this.router.navigate(['/']);
       },
       error: (e) => console.error(e)

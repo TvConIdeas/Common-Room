@@ -22,7 +22,10 @@ export class Header implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn = this.auth.isLoggedIn()
+    // Se ejecuta al inicio y se actualiza cada vez que cambie el estado (en auth service)
+    this.auth.loggedIn$.subscribe(value => {
+      this.isLoggedIn = value;
+    });
 
     this.searchForm = this.fb.group({
       searchQuery: ['', Validators.required]
@@ -40,7 +43,6 @@ export class Header implements OnInit{
 
   logout(){
     alert('Cerrando sesión...')
-    this.isLoggedIn = false
     this.auth.logout()
   }
 
