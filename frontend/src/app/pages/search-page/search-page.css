@@ -4,14 +4,14 @@
     margin-bottom: 0.8rem;
     font-size: 5em;
     letter-spacing: -3px;
-    color: var(--brown-light);
+    color: var(--brown-mid);
     outline: none;
     text-shadow:
-        1px 1px 0 black,
-        -1px -1px 0 black,
-        1px -1px 0 black,
-        -1px 1px 0 black;
-    transition: 0.7s ease;
+        1px 1px 0 var(--green-light),
+        -1px -1px 0 var(--green-light),
+        1px -1px 0 var(--green-light),
+        -1px 1px 0 var(--green-light);
+    transition: 0.7s ease;  
 }
 
 .title-section h2:hover {
@@ -21,12 +21,11 @@
 
 /* ? ======== Sección Peliculas ======== */
 .movies-section {
-    position: relative;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
     gap: 2rem;
-    max-width: 70rem;
+    grid-template-columns: repeat(5, 1fr);
     margin: 0 auto 3rem auto;
+    max-width: 70rem;
     padding: 0 2rem;
 }
 
@@ -166,14 +165,21 @@
 }
 
 /* ! ======== Responsive ======== */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+    .movies-section {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
     .movies-section {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
     .movies-section {
         grid-template-columns: 1fr;
+        gap: 1rem;
     }
 }
