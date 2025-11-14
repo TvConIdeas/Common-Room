@@ -46,6 +46,7 @@ public class UserMapper {
                 .createdAt(user.getCreatedAt())
                 .description(user.getDescription())
                 .profilePictureUrl(user.getProfilePictureUrl())
+                .role(user.getRole())
                 .build();
     }
 }

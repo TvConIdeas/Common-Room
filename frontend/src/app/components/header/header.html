@@ -14,9 +14,9 @@
         <!-- * ============ Otras Rutas | Usuario ============ -->
         <div class="info-container">
             @if (isLoggedIn) {
-                <ul>
-                    <li routerLink="/profile">Profile</li>
-                    <li>Logout</li>
+                <ul>    
+                    <li routerLink="/users/me">Profile</li>
+                    <li (click)="logout()">Logout</li>
                 </ul>
             }
             @else {
