@@ -16,7 +16,7 @@
             @if (isLoggedIn) {
                 <ul>
                     <li routerLink="/profile">Profile</li>
-                    <li>Logout</li>
+                    <li (click)="logout()">Logout</li>
                 </ul>
             }
             @else {

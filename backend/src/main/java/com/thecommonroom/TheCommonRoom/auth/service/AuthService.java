@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager; // Para procesar y validar las credenciales de usuarios
 
     // ========== REGISTRARSE ==========
-    public TokenResponse register(UserRequestDTO userRequestDTO){
+    public TokenResponse register(@RequestBody UserRequestDTO userRequestDTO){
         // Guardar user en base de datos y devolver el usuario (entidad)
         var savedUser = userService.createUser(userRequestDTO); // var => El compilador deduce el tipo de la variable a partir del valor que se le asigna
 
