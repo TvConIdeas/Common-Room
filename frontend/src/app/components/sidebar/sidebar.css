@@ -1,18 +1,20 @@
 /* * ============ Sidebar Expandible ============ */
 .sidebar {
-  margin-top: 5rem;
   position: fixed;
-  top: 0;
+  top: 4.5rem; /* altura del header */
   left: 0;
   z-index: 9;
-  height: 100vh;
+
+  height: calc(100vh - 4.5rem);
   width: 5em;
+
   background-color: var(--green-dark);
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.25);
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  text-align: center;
+
   padding: 1rem 0.5rem;
   overflow: hidden;
   transition: width 0.35s ease;
@@ -22,7 +24,7 @@
   width: 11em;
 }
 
-/* ? ---------- Ítems ---------- */
+/* ---------- Ítems ---------- */
 .sidebar-item {
   width: 80%;
   display: flex;
@@ -41,7 +43,7 @@
   transform: scale(1.02);
 }
 
-/* ? ---------- Íconos ---------- */
+/* ---------- Íconos ---------- */
 .sidebar .icon {
   width: clamp(2rem, 6vw, 3.5rem);
   height: auto;
@@ -55,7 +57,7 @@
   transform: scale(1.1);
 }
 
-/* ? ---------- Etiquetas ---------- */
+/* ---------- Etiquetas ---------- */
 .sidebar-label {
   color: var(--brown-light);
   font-size: 1.5rem;
@@ -64,23 +66,47 @@
   transition: opacity 0.3s ease;
 }
 
-/* 🔠 Aparecen al expandirse */
 .sidebar:hover .sidebar-label {
   opacity: 1;
 }
 
-/* ? ---------- Responsive ---------- */
+/* * ============ Responsive ============ */
 @media (max-width: 768px) {
+
+  /* Sidebar fijo, pequeño y NO expandible */
   .sidebar {
-    width: 70px;
+    width: 4.2rem;
+    top: 4rem; /* header más compacto en mobile */
+    height: calc(100vh - 4rem);
   }
 
   .sidebar:hover {
-    width: 70px;
-    /* no expandible en móvil */
+    width: 4.2rem;
   }
 
+  /* Etiquetas no visibles en mobile */
   .sidebar-label {
     display: none;
+  }
+
+  /* Ítems más pequeños */
+  .sidebar-item {
+    padding: 0.65rem;
+    gap: 0.5rem;
+  }
+
+  .sidebar .icon {
+    width: 2.4rem;
+  }
+}
+
+/* Pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 3.5rem;
+  }
+
+  .sidebar .icon {
+    width: 2rem;
   }
 }

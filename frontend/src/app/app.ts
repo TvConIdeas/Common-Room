@@ -1,8 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
 import { Sidebar } from './components/sidebar/sidebar';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,5 +12,18 @@ import { Sidebar } from './components/sidebar/sidebar';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('frontend');
+  showLayout = signal(true); // ← controla header/sidebar/footer
+
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        const url = event.urlAfterRedirects;
+
+        // rutas donde NO debe aparecer el layout
+        const hideFor = ['/login', '/register'];
+
+        this.showLayout.set(!hideFor.includes(url));
+      });
+  }
 }
