@@ -1,28 +1,51 @@
-<div class="container user-list">
+<div class="users-container">
 
-    <h2>Users</h2>
+    <!-- * ========== Titulo ========== -->
+    <section class="title-section">
+        <h2>Time to socialize</h2>
+    </section>
 
-
-    @for (user of pagedUsers; track user.id) {
-        <a [routerLink]="[user.username]">
-            <div class="user-card">
-                <img [src]="user.profilePictureUrl" alt="{{user.username}}">
-                <h4>{{user.username}}</h4>
-                <p>{{user.role}}</p>
-            </div>
-        </a>
+    <!-- * ========== Listado de Usuarios ========== -->
+    @if (pagedUsers.length === 0) {
+        <p class="no-results">There's no users yet!</p>
     }
-    @empty {
-        <p>No users found.</p>
+    @else {
+        <section class="users-section">
+            @for (user of pagedUsers; track user.id) {
+                <div class="user-card" [routerLink]="[user.username]">
+                    @if (user.role === 'ADMIN') {
+                        <img
+                        [src]="user.profilePictureUrl || 'assets/img/userAdmin.jpg'"
+                        alt="{{ user.username || 'Poster not available' }}"
+                        (error)="noProfilePicture($event)"
+                    />
+                    } @else {
+                        <img
+                            [src]="user.profilePictureUrl || 'assets/img/userv2.jpg'"
+                            alt="{{ user.username || 'Poster not available' }}"
+                            (error)="noProfilePicture($event)"
+                        />
+                    }  
+                    <div class="info-overlay">
+                        @if (user.role === 'ADMIN') {
+                            <h3>⭐</h3>
+                        }
+                        <h1>{{user.username}}</h1>
+                    </div>
+                </div>
+            }
+        </section>
     }
 
-    <div>
+    <!-- * ========== Botones de paginacion ========== -->
+    <section class="pagination-section">
         <button (click) = "previousPage()" 
-        [disabled]="currentPage === 1"><-</button>
+        [disabled]="currentPage === 1">←</button>
 
-        <span>Page {{currentPage}} of {{totalPages()}}</span>
-        
+        <span>Page {{currentPage}}</span>
+
         <button (click) = "nextPage()"
         [disabled]="currentPage === totalPages()">-></button>
-    </div>
+    </section>
+
 </div>
