@@ -1,4 +1,4 @@
-/* * ============ Header ============ */
+/* * ======== Elemento | Header ======== */
 header {
     position: fixed;
     width: 100%;
@@ -10,6 +10,7 @@ header {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
+/* ? ------- Container ------- */
 .header-container {
     padding: 1rem;
     display: flex;
@@ -19,7 +20,7 @@ header {
     max-width: 100%;
 }
 
-/* ? ---------- Logo ---------- */
+/* * ======== Elemento | Logo ======== */
 header .logo-container {
     display: flex;
     align-items: center;
@@ -38,7 +39,7 @@ header .logo-container:hover .logo-img {
     transform: scale(1.2);
 }
 
-/* ? ---------- Search bar ---------- */
+/* * ======== Elemento | Search Bar ======== */
 .search-container {
     display: flex;
     align-items: center;
@@ -56,10 +57,11 @@ header .logo-container:hover .logo-img {
     border-radius: 0.25rem;
 }
 
-.search-bar::placeholder{
+.search-bar::placeholder {
     color: var(--green-dark);
 }
 
+/* ? ------- Search Icon ------- */
 .search-icon {
     padding: 0.5rem;
     cursor: pointer;
@@ -74,7 +76,7 @@ header .logo-container:hover .logo-img {
     background-color: var(--green-plus-light);
 }
 
-/* ? ---------- RouterLinks ---------- */
+/* ? ------- Routers ------- */
 .info-container ul {
     display: flex;
     gap: 1rem;
@@ -97,7 +99,7 @@ header .logo-container:hover .logo-img {
     transform: scale(1.1);
 }
 
-/* ! ---------- Responsive ---------- */
+/* ! __________ Responsive __________ */
 @media (max-width: 420px) {
     header {
         padding: 0.6% 0.8%;

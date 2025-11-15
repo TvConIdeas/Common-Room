@@ -1,4 +1,4 @@
-/* ? ======== Contenedor principal ======== */
+/* * ======== Container | Register ======== */
 .register-container {
     position: fixed;
     top: 0;
@@ -15,12 +15,11 @@
     background: linear-gradient(to bottom, #0b0b2b, #1b2735 70%, #090a0f);
 }
 
-/* * --- Botón volver --- */
+/* * ======== Elemento | Back Button ======== */
 .register-logo {
     position: absolute;
     top: 1.5rem;
     left: 1.5rem;
-
     display: flex;
     align-items: center;
     z-index: 50;
@@ -31,7 +30,6 @@
     width: clamp(2rem, 6vw, 3.5rem);
     height: auto;
     max-height: 4rem;
-
     cursor: pointer;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
@@ -41,7 +39,7 @@
     transform: scale(1.2);
 }
 
-/* ? ======== Caja del formulario ======== */
+/* * ======== Elemento | Form ======== */
 .register-container form {
     width: 100%;
     max-width: 23.75rem;
@@ -53,7 +51,7 @@
     z-index: 10;
 }
 
-/* ? ======== Title ======== */
+/* ? ------- Title------- */
 .register-title {
     font-size: 2rem;
     text-align: center;
@@ -65,21 +63,21 @@
     color: var(--green-semi-dark);
 }
 
-/* ? ======== Grupo de input ======== */
+/* ? ------- Inputs Configuration ------- */
 .register-container form div {
     display: flex;
     flex-direction: column;
     margin-bottom: 1.3rem;
 }
 
-/* ? ======== Label (colores del login) ======== */
+/* ? ------- Labels ------- */
 .register-container label {
     font-size: 1rem;
     margin-bottom: 0.375rem;
-    color: #1c3a2a;
+    color: var(--green-semi-dark);
 }
 
-/* ? ======== Inputs estilo login ======== */
+/* ? ------- Inputs Configuration ------- */
 .register-container input {
     width: 100%;
     padding: 0.7rem 0;
@@ -96,7 +94,7 @@
     border-bottom-color: #8fa072;
 }
 
-/* ? ======== Mensajes de error ======== */
+/* ! ------- Inputs Error ------- */
 .register-container p {
     margin-top: 0.375rem;
     font-size: 0.75rem;
@@ -104,7 +102,7 @@
     font-weight: bold;
 }
 
-/* ? ======== Botón estilo login ======== */
+/* ? ------- Button ------- */
 .register-container button {
     width: 100%;
     padding: 0.7rem;
@@ -130,7 +128,7 @@
     background-color: #8fa072;
 }
 
-/* ? ======== Texto de login ======== */
+/* ? ------- Router | Login ------- */
 .register-container form > p {
     margin-top: 1.3rem;
     text-align: center;
@@ -148,8 +146,8 @@
     text-decoration: underline;
 }
 
-/* ? ======== Stars ======== */
-/* * --- Fijas --- */
+/* * ======== Elemento | Stars ======== */
+/* ? ------- Simple ------- */
 .stars {
     width: 1px;
     height: 1px;
@@ -190,7 +188,7 @@
     animation: twinkle 6s infinite linear reverse;
 }
 
-/* * --- Fugases --- */
+/* ? ------- Shooting Stars ------- */
 .shooting-star {
     position: absolute;
     width: 100px;
@@ -199,7 +197,7 @@
     animation: shoot 3s infinite ease-in;
 }
 
-/* * --- Animaciones --- */
+/* ? ------- Animation ------- */
 @keyframes twinkle {
     0%, 100% { opacity: 0.8; }
     50% { opacity: 0.4; }
@@ -216,7 +214,6 @@
     }
 }
 
-/* * --- Llamado --- */
 .shooting-star:nth-child(2) { top: 20%; left: -100px; animation-delay: 0s; }
 .shooting-star:nth-child(3) { top: 35%; left: -100px; animation-delay: 1s; }
 .shooting-star:nth-child(4) { top: 50%; left: -100px; animation-delay: 2s; }
@@ -224,7 +221,6 @@
 .shooting-star:nth-child(6) { top: 80%; left: -100px; animation-delay: 4s; }
 
 /* ! ======== Responsive ======== */
-/* Tablets y pantallas medianas */
 @media (max-width: 768px) {
 
     .register-container form {
@@ -257,7 +253,6 @@
     }
 }
 
-/* Teléfonos pequeños */
 @media (max-width: 480px) {
 
     .register-container {
@@ -308,7 +303,6 @@
     }
 }
 
-/* Teléfonos muy chicos (iPhone SE, Android compactos) */
 @media (max-width: 360px) {
 
     .register-container form {
@@ -340,7 +334,6 @@
     }
 }
 
-/* Reducir animaciones de estrellas en móviles (performance) */
 @media (max-width: 768px) {
     .shooting-star {
         animation-duration: 4.5s;
@@ -355,7 +348,6 @@
     }
 }
 
-/* Evitar saturación de efectos en pantallas mini */
 @media (max-width: 360px) {
     .stars {
         transform: scale(0.85);

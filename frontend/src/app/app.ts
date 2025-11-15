@@ -12,7 +12,7 @@ import { filter } from 'rxjs';
   styleUrl: './app.css'
 })
 export class App {
-  showLayout = signal(true); // ← controla header/sidebar/footer
+  showLayout = signal(true); // ? <- Controla header/sidebar/footer
 
   constructor(private router: Router) {
     this.router.events
@@ -20,7 +20,7 @@ export class App {
       .subscribe((event: any) => {
         const url = event.urlAfterRedirects;
 
-        // rutas donde NO debe aparecer el layout
+        // ! --- Rutas donde NO debe aparecer el layout
         const hideFor = ['/login', '/register'];
 
         this.showLayout.set(!hideFor.includes(url));

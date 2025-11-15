@@ -2,6 +2,7 @@
 
     @if (showLayout()) {
         <app-header></app-header>
+        <app-sidebar></app-sidebar>
     }
 
     <main [class.no-layout]="!showLayout()">
@@ -9,7 +10,6 @@
     </main>
 
     @if (showLayout()) {
-        <app-sidebar></app-sidebar>
         <app-footer></app-footer>
     }
 
