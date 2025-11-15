@@ -11,7 +11,8 @@
           "scrollbar-width"
         ]
       }
-    ]
+    ],
+    "button-type": "off"
   },
   "browserslist": [
     "defaults",
