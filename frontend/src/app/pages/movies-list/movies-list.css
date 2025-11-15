@@ -1,4 +1,4 @@
-/* ? ======== Sección Titulo ======== */
+/* * ======== Section | Title ======== */
 .title-section h2 {
     text-align: center;
     margin-bottom: 0.8rem;
@@ -19,7 +19,7 @@
     font-variation-settings: "wght" 582;
 }
 
-/* ? ======== Sección Peliculas ======== */
+/* * ======== Section | Movies ======== */
 .movies-section {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -29,7 +29,7 @@
     padding: 0 2rem;
 }
 
-/* ? ======== Tarjeta de película ======== */
+/* * ======== Elemento | Movie Card ======== */
 .movie-card {
     margin: 0 auto;
     max-width: 18rem;
@@ -48,7 +48,7 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-/* * ----- Poster de la pelicula ----- */
+/* ? ------- Image Wrapper ------- */
 .img-wrapper {
     position: relative;
     aspect-ratio: 2 / 3;
@@ -62,7 +62,7 @@
     object-fit: cover;
 }
 
-/* * ----- Informacion de la pelicula -----*/
+/* ? ------- Information ------- */
 .info-overlay {
     position: absolute;
     top: 0px;
@@ -103,7 +103,7 @@
     transition: all .5s ease-in-out;
 }
 
-/* ? ======== Botones para la paginacion ======== */
+/* * ======== Section | Pagination ======== */
 .pagination-section {
     display: flex;
     justify-content: center;
@@ -121,6 +121,7 @@
     user-select: none;
 }
 
+/*? --- Navegation Buttons ---*/
 .pagination-section button {
     display: inline-block;
     padding: 0.5rem 1rem;
@@ -134,7 +135,6 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/*? --- Efecto Hover ---*/
 .pagination-section button:hover {
     background-color: var(--brown-mid);
     transform: scale(1.1);
@@ -147,7 +147,7 @@
     cursor: not-allowed;
 }
 
-/* ! ======== Responsive ======== */
+/* ! __________ Responsive __________ */
 @media (max-width: 1024px) {
     .movies-section {
         grid-template-columns: repeat(3, 1fr);

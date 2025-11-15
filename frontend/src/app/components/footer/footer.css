@@ -1,4 +1,4 @@
-/* * ============ Footer ============ */
+/* * ======== Footer ======== */
 footer{
     align-items: center;
     background-color: var(--green-dark);
@@ -7,7 +7,7 @@ footer{
     z-index: 20;
 }
 
-/* ? ---------- Informacion ---------- */
+/* ? ------- Informacion ------- */
 footer ul {
     list-style: none;
     display: flex;

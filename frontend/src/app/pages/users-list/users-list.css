@@ -138,6 +138,7 @@
 
 .pagination-section button {
     background-color: var(--green-dark);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border: none;
     border-radius: 0.25rem;
     color: var(--text-light);

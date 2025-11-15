@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import MovieBase from '../../models/MovieBase';
 import { MovieService } from '../../services/movie-service';
 import { RouterLink } from '@angular/router';
