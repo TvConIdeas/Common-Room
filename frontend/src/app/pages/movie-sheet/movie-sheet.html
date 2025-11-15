@@ -1,15 +1,31 @@
-@if(chosenMovie){
-    <h3>{{chosenMovie.title}}</h3>
-    <img src="{{chosenMovie.posterUrl}}" alt="movie poster">
-    <h4>{{chosenMovie.releaseDate}}</h4>
-    <h4>{{chosenMovie.synopsis}}</h4>
-    <h4>{{chosenMovie.duration}}</h4>
-    <h4>{{chosenMovie.genres}}</h4>
-    <h4>{{chosenMovie.voteAverage}}</h4>
-    <h4>{{chosenMovie.budget}}</h4>
-    <h4>{{chosenMovie.revenue}}</h4>
-    <h4>{{chosenMovie.backdropUrl}}</h4>
-}
-@else{
+<div class="movie-sheet-container">
+  <section>
+    @if(chosenMovie){
+    <h3>{{ chosenMovie.title }}</h3>
+    <img src="{{ chosenMovie.posterUrl }}" alt="movie poster" />
+    <h4>{{ chosenMovie.releaseDate }}</h4>
+    <h4>{{ chosenMovie.synopsis }}</h4>
+    <h4>{{ chosenMovie.duration }}</h4>
+    <h4>{{ chosenMovie.genres }}</h4>
+    <h4>{{ chosenMovie.voteAverage }}</h4>
+    <h4>{{ chosenMovie.budget }}</h4>
+    <h4>{{ chosenMovie.revenue }}</h4>
+    <h4>{{ chosenMovie.backdropUrl }}</h4>
+
+    <section>
+      <h2>People's thoughts</h2>
+      <!-- boton de modal -->
+      <button (click)="openModal()">Review +</button>
+      @if (isModalOpen()) {
+      <app-review-modal (close)="closeModal()" [movie]="chosenMovie"></app-review-modal> <!-- Se le pasa al modal de crear reseña la info de la peli -->
+
+      } @if (reviews) {
+      <p>No hay reseñas todavía</p>
+      }
+      <!-- for con las reseñas -->
+    </section>
+    } @else{
     <h3>No movie was found with that title</h3>
-}
+    }
+  </section>
+</div>
