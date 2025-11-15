@@ -17,22 +17,22 @@ export class ReviewService {
   }
   
   //PUT review
-  updateReview(reviewId: string, review: Review): Observable<Review>{
-    return this.http.put<Review>(`${this.URL}/reviews/${reviewId}`, review)
+  updateReview(review: Review): Observable<Review>{
+    return this.http.put<Review>(`${this.URL}/reviews/${review.id}`, review)
   }
   
   //DELETE review
-  deleteReview(reviewId: string): Observable<void>{
+  deleteReview(reviewId: number): Observable<void>{
     return this.http.delete<void>(`${this.URL}/review/${reviewId}`)
   }
   
   //GET reviews por película
-  getReviewsForMovie(movieId: string): Observable<Review[]>{
+  getReviewsForMovie(movieId: number): Observable<Review[]>{
     return this.http.get<Review[]>(`${this.URL}/movies/${movieId}/reviews`)
   }
 
   //GET reviews por usuario
-  gerReviewsForUser(userId: string): Observable<Review[]>{
+  getReviewsForUser(userId: number): Observable<Review[]>{
     return this.http.get<Review[]>(`${this.URL}/users/${userId}/reviews`)
   }
 

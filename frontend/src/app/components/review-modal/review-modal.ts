@@ -1,14 +1,6 @@
 import { Component, input, OnInit, output } from '@angular/core';
 import { MovieDetails } from '../../models/MovieDetails';
-import {
-  ValidatorFn,
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-  ValidationErrors,
-} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators, ValidationErrors } from '@angular/forms';
 import { Review } from '../../models/Review';
 import { ReviewService } from '../../services/review-service';
 

@@ -15,14 +15,23 @@
     <section>
       <h2>People's thoughts</h2>
       <!-- boton de modal -->
+       @if () {}
       <button (click)="openModal()">Review +</button>
       @if (isModalOpen()) {
-      <app-review-modal (close)="closeModal()" [movie]="chosenMovie"></app-review-modal> <!-- Se le pasa al modal de crear reseña la info de la peli -->
-
-      } @if (reviews) {
-      <p>No hay reseñas todavía</p>
+        <app-review-modal (close)="closeModal()" [movie]="chosenMovie"></app-review-modal>
+        <!-- Se le pasa al modal de crear reseña la info de la peli -->
+      } 
+      @if (!reviews) {
+        <p>No hay reseñas todavía</p>
       }
-      <!-- for con las reseñas -->
+      @for (review of reviews; track review.id) {
+        <div>
+          <h2>{{review.userPreview.username}}</h2>
+          <h2>{{review.rating}}</h2>
+          <h2>{{review.comment}}</h2>
+          <h2>{{review.createdAt}}</h2>
+        </div>
+      }
     </section>
     } @else{
     <h3>No movie was found with that title</h3>

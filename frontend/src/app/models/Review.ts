@@ -6,5 +6,5 @@ export interface Review {
     comment?: string;
     createdAt: string;
     movieId: number;
-    user: User;
+    userPreview: User;
 }
