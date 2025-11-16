@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { User } from '../models/User';
 import TokenResponse from '../models/TokenResponse';
 import ChangePassword from '../models/ChangePassword';
-import { RegisterRequest } from '../models/RegisterRequest';
 
 @Injectable({
   providedIn: 'root'

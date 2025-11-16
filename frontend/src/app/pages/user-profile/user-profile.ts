@@ -183,12 +183,16 @@ export class UserProfile implements OnInit{
     this.uService.deleteUser(username).subscribe({
       next: () => {
         alert('Profile deleted successfully.')
-        this.router.navigate(['/'])
+        this.auth.logout()
       },
       error: (e) => {
         console.error(e)
         this.deleteError = "Error deleting profile. Please try again later."
       }
     })
+  }
+
+  isLoggedIn(): boolean { // Necesitas un método como este
+     return !!localStorage.getItem('access_token');
   }
 }
