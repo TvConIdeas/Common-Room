@@ -128,7 +128,6 @@
 .details-section {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
 
     width: 95%;
     margin: 0 auto;
@@ -166,7 +165,6 @@
 .reviews-section {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
 
     width: 95%;
     margin: 0 auto;
@@ -196,6 +194,7 @@
 .addReview-button {
     align-self: center;
 
+    margin-top: 1rem;
     padding: 0.5rem 1rem;
     font-size: 1.5rem;
     color: var(--text-light);

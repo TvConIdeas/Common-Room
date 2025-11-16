@@ -53,7 +53,7 @@
       <!-- ! === Modal "New Review" | "Edit Review" === -->
       @if (isModalOpen()) {
         <!-- Se le pasa al modal de crear reseña la info de la peli -->
-        <app-review-modal (close)="closeReviewModal()" [movie]="chosenMovie"></app-review-modal>
+        <app-review-modal (close)="closeReviewModal()" (submitted)="refreshReviews()" [movie]="chosenMovie"></app-review-modal>
       } 
 
       <!-- ? === Listado de Reviews === -->

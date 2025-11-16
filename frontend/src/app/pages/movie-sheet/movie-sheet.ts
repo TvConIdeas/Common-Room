@@ -50,7 +50,8 @@ export class MovieSheet implements OnInit{
     })
   }
 
-  // ! -------- Metodo para cargar las reviews -------- 
+  // ! -------- Metodo para cargar las reviews --------
+  // ? ----- Cargar Reseñas -----
   loadReviews(movieId: number){
     this.rService.getReviewsForMovie(movieId).subscribe({
       next: (data) => {this.reviews = data},
@@ -58,7 +59,7 @@ export class MovieSheet implements OnInit{
     })
   }
 
-  //Método para borrar reviews
+  // ! -------- Metodo para borrar reviews --------
   onDeleteReview(reviewId : number){
     if(confirm('Are your sure you want to delete this review?')){
       this.rService.deleteReview(reviewId).subscribe({
@@ -74,6 +75,7 @@ export class MovieSheet implements OnInit{
     }
   }
 
+  // ? ----- Si el usuario tiene una reseña -----
   hasReview(){
     
   }
@@ -87,6 +89,11 @@ export class MovieSheet implements OnInit{
     this.isModalOpen.set(false)
   }
 
+  // ? ----- Para reiniciar la pagina cuando se agregue o edite -----
+  refreshReviews() {
+    this.loadReviews(this.chosenMovie.id);
+  }
+
   // * -------- Metodo para reemplazar posters sin imagen --------
   onImgError(event: Event): void {
     const img = event.target as HTMLImageElement;
@@ -98,5 +105,4 @@ export class MovieSheet implements OnInit{
     const img = event.target as HTMLImageElement;
     img.src = 'assets/img/user.png';
   }
-
 }
