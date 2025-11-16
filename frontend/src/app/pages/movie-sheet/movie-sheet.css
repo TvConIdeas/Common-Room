@@ -190,6 +190,23 @@
     color: var(--green-light);
 }
 
+/* ! --- No Reviews --- */
+.no-reviews {
+    display: block;
+    align-items: center;
+    margin-top: 1rem; 
+    width: 70%;
+    text-align: center;
+    padding: 0.75rem 0;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: white;
+    background-color: rgb(150, 84, 84);
+    border: 0.3em solid rgb(134, 10, 10);
+    border-radius: 0.7rem;
+    user-select: none;
+}
+
 /* * ======== Element | Add Review Button ======== */
 .addReview-button {
     align-self: center;
@@ -247,14 +264,12 @@
 .review-header {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
 
     margin: 0.5rem;
     padding: 0.7rem 1rem;
 
     background-color: var(--brown-light);
     border-radius: 0.5rem;
-    cursor: pointer;
 }
 
 .review-header img {
@@ -262,6 +277,7 @@
     height: 2.5rem;
 
     object-fit: cover;
+    margin-right: 0.5rem;
 
     border: 0.3rem solid var(--brown-dark);
     border-radius: 50%;
@@ -274,6 +290,7 @@
     line-height: 1.2;
     color: var(--text-dark);
     flex-grow: 1;
+    cursor: pointer;
 }
 
 .review-header h2 strong {
@@ -281,6 +298,23 @@
     font-size: 1.2em;
     font-weight: bold;
     color: var(--text-light);
+}
+
+.review-header button{
+    background-color: var(--brown-mid);
+    justify-content: center;
+    padding: 0.5rem;
+    margin: 0.2rem;
+    border-radius: 50%;
+    align-items: center;
+    border: 0.2rem var(--brown-dark) solid;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s ease;
+}
+
+.review-header button:hover{
+    background-color: var(--green-light);
 }
 
 /* ? --- BODY --- */

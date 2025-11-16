@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { UserService } from '../../services/user-service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { User } from '../../models/User';
 import { ReviewService } from '../../services/review-service';
 import { Review } from '../../models/Review';
@@ -19,9 +19,7 @@ export class UserProfile implements OnInit{
   isMyProfile = false
   reviews: Review[] = []
   isModalOpen = signal(false)
-
   isLoggedIn = false
-  currentUsername: string | null = null
 
   constructor(private route: ActivatedRoute, 
     public uService: UserService,
@@ -30,13 +28,17 @@ export class UserProfile implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    const username = this.route.snapshot.params['username']
-
-    this.isLoggedIn = this.auth.isLoggedIn()
-    this.currentUsername = this.auth.getUsername()
-    this.isMyProfile = (username === 'me' || username === this.currentUsername)
-    this.loadUser(username)
-    this.loadReviews(username)
+    // Suscribirse a los cambios en los parametros de la ruta | Header
+    this.route.params.subscribe(params => {
+      const user = params['username'];
+      
+      if (user) {
+        this.isLoggedIn = this.auth.isLoggedIn()
+        this.loadUser(user)
+        this.loadReviews(user)      
+        this.isMyProfile = (user === this.selectedUser)
+      }
+    })
   }
 
   loadUser(username: string){
