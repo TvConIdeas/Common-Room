@@ -126,12 +126,11 @@ export class ReviewModal implements OnInit {
     if (modal) {
       modal.classList.add('closing');
 
-      // Espera a que termine la animación (300ms)
       setTimeout(() => {
         this.close.emit();
       }, 300);
     } else {
-      this.close.emit(); // fallback
+      this.close.emit();
     }
   }
 

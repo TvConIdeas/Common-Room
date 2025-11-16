@@ -37,6 +37,8 @@ export class MovieSheet implements OnInit{
     this.isLoggedIn = this.auth.isLoggedIn()
     this.currentUsername = this.auth.getUsername()
 
+    console.log(this.isLoggedIn)
+    console.log(this.currentUsername)
     // Cargamos la pelicula y sus reviews
     this.loadMovie(movieId)
     this.loadReviews(movieId)
@@ -59,6 +61,15 @@ export class MovieSheet implements OnInit{
     })
   }
 
+  // ! -------- Metodo para mostrar los botones --------
+  userReview(review : Review){
+    if(review.userPreview.username === this.currentUsername){
+      return true
+    }else{
+      return false
+    }
+  }
+
   // ! -------- Metodo para borrar reviews --------
   onDeleteReview(reviewId : number){
     if(confirm('Are your sure you want to delete this review?')){
@@ -73,11 +84,6 @@ export class MovieSheet implements OnInit{
         }
       })
     }
-  }
-
-  // ? ----- Si el usuario tiene una reseña -----
-  hasReview(){
-    
   }
 
   // ! ====== Metodos para el Model ======
