@@ -21,10 +21,10 @@ export class ReviewModal implements OnInit {
   ngOnInit(): void {
     this.reviewForm = this.fb.group({
       rating: [
-        '',
+        this.review()?.rating ?? '', // Nullish Coalescing - Si lo de la izquierda es null o undefined, usá lo de la derecha.
         [Validators.required, Validators.min(0.5), Validators.max(5), this.multipleOfHalf],
       ],
-      comment: [null, [Validators.maxLength(700)]],
+      comment: [this.review()?.comment ?? null, [Validators.maxLength(700)]],
       movieId: this.movie()?.id
     });
   }
@@ -36,10 +36,31 @@ export class ReviewModal implements OnInit {
   }
 
   onSubmit() {
+    if(!this.review()){ // SI no existe la review, es para crear
+      this.addReview()
+    } else{
+      this.editReview()
+    }
+  }
+
+  addReview(){
     this.reviewService.createReview(this.reviewForm.value).subscribe({
       next: (data) => {
-        console.log(this.reviewForm.value);
         alert('Review saved successfully!');
+        this.closeModal();
+      },
+      error: (e) => console.error(e),
+    });
+  }
+
+  editReview(){
+    const updatedReview = {
+        ...this.reviewForm.value,
+        id: this.review()?.id
+      };
+    this.reviewService.updateReview(updatedReview).subscribe({
+      next: (data) => {
+        alert('Review updated successfully!');
         this.closeModal();
       },
       error: (e) => console.error(e),

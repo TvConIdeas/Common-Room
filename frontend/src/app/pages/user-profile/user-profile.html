@@ -1,8 +1,37 @@
-@if(selectedUser){
-    <img src="{{selectedUser.profilePictureUrl}}" alt="{{selectedUser.username}}" />
-    <h3>{{selectedUser.username}}</h3>
-    <h4>{{selectedUser.description}}</h4>
-}
-@else{
+<div class="user-profile-container">
+  @if(selectedUser){
+    <section class="user-section">
+        <img src="{{ selectedUser.profilePictureUrl }}" alt="{{ selectedUser.username }}" />
+        <h3>{{ selectedUser.username }}</h3>
+        <h4>{{ selectedUser.description }}</h4>
+    </section>
+    <section class="reviews-section">
+        <h2 class="title-reviews">{{selectedUser.username}}'s thoughts</h2>
+        @if (reviews.length === 0) {
+            <h3>No hay reseñas todavía</h3>
+        } @else {
+            @for (review of reviews; track review.id) {
+                <div class="review-card">
+                    <div class="review-details" [routerLink]="['/movies', review.moviePreview.id]">
+                        <h3>{{review.moviePreview.title}}</h3>
+                        <h3>{{review.createdAt}}</h3>
+                        <h3>{{review.rating}}</h3>
+                        <h3>{{review.comment}}</h3>
+                    </div>
+    
+                    <div class="review-buttons">
+                        <button (click)="openReviewModal()">Edit</button>
+                        @if (isModalOpen()) {
+                            <app-review-modal (close)="closeReviewModal()" [movie]="review.moviePreview" [review]="review"></app-review-modal>
+                        }
+                        <button>Delete</button>
+                    </div>
+                </div>
+            }
+        }
+    </section>
+
+  } @else{
     <h3>User not found</h3>
-}
+  }
+</div>

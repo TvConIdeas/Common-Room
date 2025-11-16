@@ -32,8 +32,8 @@ export class ReviewService {
   }
 
   //GET reviews por usuario
-  getReviewsForUser(userId: number): Observable<Review[]>{
-    return this.http.get<Review[]>(`${this.URL}/users/${userId}/reviews`)
+  getReviewsForUser(username: string): Observable<Review[]>{
+    return this.http.get<Review[]>(`${this.URL}/users/${username}/reviews`)
   }
 
 }

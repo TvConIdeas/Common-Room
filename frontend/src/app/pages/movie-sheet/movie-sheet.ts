@@ -57,11 +57,11 @@ export class MovieSheet implements OnInit{
   }
 
   // ! ====== Metodos para el Model ======
-  openModal(){
+  openReviewModal(){
     this.isModalOpen.set(true)
   }
 
-  closeModal(){
+  closeReviewModal(){
     this.isModalOpen.set(false)
   }
 

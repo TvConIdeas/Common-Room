@@ -56,12 +56,12 @@
       <h2 class="title-reviews">People's thoughts</h2>
 
       <!-- ? === Boton "Nueva reseña" === -->
-      <button (click)="openModal()">Review +</button>
+      <button (click)="openReviewModal()">Review +</button>
       
       <!-- ! === Modal "New Review" | "Edit Review" === -->
       @if (isModalOpen()) {
         <!-- Se le pasa al modal de crear reseña la info de la peli -->
-        <app-review-modal (close)="closeModal()" [movie]="chosenMovie"></app-review-modal>
+        <app-review-modal (close)="closeReviewModal()" [movie]="chosenMovie"></app-review-modal>
       } 
 
       <!-- ? === Listado de Reviews === -->

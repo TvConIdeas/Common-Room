@@ -1,3 +1,4 @@
+import { MovieDetails } from "./MovieDetails";
 import { User } from "./User";
 
 export interface Review {
@@ -5,6 +6,6 @@ export interface Review {
     rating: number;
     comment?: string;
     createdAt: string;
-    movieId: number;
+    moviePreview: MovieDetails;
     userPreview: User;
 }
