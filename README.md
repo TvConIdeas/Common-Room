@@ -1,63 +1,101 @@
-# 🎬 Common Room
+# 🎬 Common Room | v.2.0
 
 ---
+
 ## ✒️ Autores
 
-- **Delfina Fenoy Rivas.**
-- **Ian Francano.**
-- **Lola Pérez.**
+- **Fenoy Rivas, Delfina**
+- **Francano, Ian**
+- **Pérez, Lola**
 
 ---
 
-**Common Room** es una red social web pensada para personas apasionadas por el cine. Desarrollada como aplicación full-stack con **Java + Spring Boot y Angular 20**, permite a los usuarios compartir reseñas, puntuar películas, armar listas personalizadas y descubrir recomendaciones a través de una comunidad interactiva.
+## 📌 Descripción General
+
+Common Room es una aplicación web full-stack orientada a la comunidad cinéfila. Permite a los usuarios compartir reseñas, descubrir películas, gestionar perfiles personales y explorar contenido proveniente de la API externa TheMovieDB.
+
+El proyecto fue desarrollado utilizando **Java 21 + Spring Boot 3.4.5** en el backend y **Angular 20** en el frontend, aplicando prácticas modernas de arquitectura, autenticación JWT, validaciones, documentación OpenAPI y un diseño modular escalable.
+
+Este sistema forma parte del trabajo integrador final de las materias **Programación IV** y **Gestión de Proyectos de Software**, dentro de la **Tecnicatura Universitaria en Programación – UTN FRMDP**.
 
 ---
 
-## 🧭 Propósito del Proyecto
+## 🎯 Propósito del Proyecto
 
-Este sistema busca brindar un entorno social, simple e intuitivo, donde los cinéfilos puedan:
-- Opinar y descubrir películas.
-- Crear sus propias colecciones.
-- Interactuar con contenido generado por otros usuarios.
+El proposido de esta plataforma es ser intuitiva y dinámica donde los usuarios puedan:
+
+- Explorar películas a través de un catálogo actualizado.
+- Publicar, modificar y eliminar reseñas.
+- Visualizar perfiles y opiniones de otros miembros.
+- Interactuar mediante puntajes, listas _(funcionalidad propuesta como cambio evolutivo)_ y recomendaciones.
+
+El objetivo principal es fomentar la participación dentro de una comunidad basada en gustos cinematográficos.
 
 ---
 
 ## 🌐 Funcionalidades Principales
 
-- Registro y autenticación con manejo de roles (Visitante, Miembro y Moderador).
-- Publicación, edición y baja de reseñas.
-- Alta y gestión de listas personalizadas de películas.
-- Exploración y visualización de fichas de películas vía integración con [TheMovieDB](https://www.themoviedb.org/).
-- Interacción con otros usuarios: visualización de perfiles, likeo de reseñas, exploración de listas públicas.
-- Gestión de usuarios por parte de Moderadores.
-- Envío de correos (bienvenida, notificaciones).
-- Documentación técnica automática de la API mediante Swagger / OpenAPI.
+### Gestión de Usuarios
+
+- Registro con validaciones.
+- Login con autenticación JWT.
+- **Roles:** Visitante, Miembro, Moderador.
+- Edición y eliminación de perfil.
+- Visualización de perfiles públicos.
+
+### Reseñas
+
+- Alta, baja y modificación de reseñas propias.
+- Visualización de reseñas por película o por usuario.
+- Control de permisos según rol.
+- Puntuaciones entre 0.5 y 5.
+
+### Películas
+
+- Consulta a TheMovieDB (TMDB).
+- Fichas detalladas con datos dinámicos.
+- Búsqueda y filtrado con paginación.
+- Mensajes de estado claros.
+
+### Interactividad
+
+- Likes _(Proximamente)_ y exploración de contenido de otros usuarios.
+- Perfiles accesibles de forma pública.
+
+### Administración
+
+- Moderación de usuarios.
+- Eliminación de reseñas inapropiadas.
+- Gestión de roles.
 
 ---
 
 ## 🔧 Tecnologías Utilizadas
 
-### Backend
+### 💻 Backend
+
 - **Java 21**
 - **Spring Boot 3.4.5**
-  - Spring Web (REST)
+  - Spring Web _(REST)_
   - Spring Data JPA
-  - Spring Security (JWT y roles)
+  - Spring Security _(JWT y roles)_
   - Spring Mail
   - Spring Validation
   - DevTools
-- **JJWT** (manejo de tokens)
-- **MySQL** (base de datos relacional)
-- **SpringDoc OpenAPI** (Swagger)
+- **JJWT** _(manejo de tokens)_
+- **MySQL** _(base de datos relacional)_
+- **SpringDoc OpenAPI** _(Swagger)_
 - **Lombok**
 
-### Frontend
+### 🖌️ Frontend
+
 - **Angular 20**
 - **HTML + CSS**
 - **TypeScript**
 
-### API externa
-- [TheMovieDB](https://www.themoviedb.org/) – para datos dinámicos de películas
+### 🍿 API externa
+
+- [TheMovieDB](https://www.themoviedb.org/) _(datos dinámicos de películas)_
 
 ---
 
@@ -75,14 +113,6 @@ Entre las más relevantes se incluyen:
 - `mysql-connector-j` → Conexión a base de datos.
 - `lombok` → Reducción de boilerplate.
 
-Las dependencias principales del proyecto de Angular incluyen:
-
-- @angular/core → Núcleo del framework.
-- @angular/common → Directivas y pipes comunes.
-- @angular/router → Para la navegación y enrutamiento en la SPA.
-- @angular/common/http → Cliente HTTP para la comunicación con la API.
-- rxjs → Manejo de observables y programación reactiva.
-
 ---
 
 ## ✅ Requisitos Funcionales Destacados
@@ -94,24 +124,15 @@ Las dependencias principales del proyecto de Angular incluyen:
 - RF28-RF29: Moderación de usuarios y asignación de roles.
 - RF30-RF32: Exploración de perfiles de otros usuarios.
 
-> Para ver todos los requisitos, consultar la [documentación completa en PDF](./Documentos/Documentacion-CommonRoom-PDF.pdf).
-
----
-
-## 🖥️ Arquitectura General
-
-- Aplicación web con arquitectura **cliente-servidor**.
-- Backend expone una **API REST** y gestiona seguridad, lógica y persistencia.
-- Frontend una "Single Page Application" construida con Angular 20. Se ejecuta completamente en el navegador del cliente.
-- Integración con servicios externos (TheMovieDB) y base de datos relacional.
+> Para ver todos los requisitos, consultar la [documentación completa en PDF](./docs/gestion/Documentos/TPFinal_Gestion_GrupoN°X_FenoyRivas_Francano_Perez_Checkpoint2.pdf).
 
 ---
 
 ## 👥 Roles y Permisos
 
-- **Visitante:** puede explorar películas, reseñas y listas públicas.
-- **Miembro:** puede crear contenido (reseñas, listas), favear, editar su perfil.
-- **Moderador:** puede suspender usuarios, modificar roles y eliminar contenido inapropiado.
+- **Visitante:** Puede explorar películas, reseñas y listas públicas.
+- **Miembro:** Puede crear contenido _(reseñas, listas)_, favear, editar su perfil.
+- **Moderador:** Puede suspender usuarios, modificar roles y eliminar contenido inapropiado.
 
 ---
 
@@ -119,9 +140,11 @@ Las dependencias principales del proyecto de Angular incluyen:
 
 Este proyecto fue desarrollado en el marco de la **Tecnicatura Universitaria en Programación** en la **Universidad Tecnológica Nacional (UTN) – Facultad Regional Mar del Plata**, como trabajo final integrador de la materia Programación IV.
 
-Fecha de entrega: **14 de noviembre de 2025**  
-Docentes: 
-- **Lucrecia Bazán**
+- Fecha de entrega: **17 de noviembre de 2025**
+- Docente: **Lucrecia Bazán**
+- Comision : **2**
+- Grupo N°5
+- Minuta del proyecto : [Link](https://docs.google.com/spreadsheets/d/1ofb9SEeJdl3FvoqmaAEXirbTYtGzYBaV5KgD8BOETCs/edit?usp=sharing)
 
 ---
 

@@ -1,0 +1,46 @@
+<div class="review-modal-container">
+  <form [formGroup]="reviewForm" (submit)="onSubmit()">
+    <!-- HEADER -->
+    <div class="header-modal">
+      <!-- Si hay un id de review, es para modificar, sino para crear -->
+      <h1>{{ review()?.id ? 'Modify Review' : 'New Review' }}</h1>
+      <span (click)="closeModal()">&#x2715;</span>
+    </div>
+    <!-- BODY -->
+    <div class="body-modal">
+      <div>
+        <label for="rating">Rating</label>
+        <input type="number" id="rating" formControlName="rating" />
+        @if (
+            reviewForm.get('rating')?.hasError('required') && 
+            reviewForm.get('rating')?.touched) 
+        {
+            <p>Rating is required.</p>
+        } @else if (
+            (reviewForm.get('rating')?.hasError('max') ||
+            reviewForm.get('rating')?.hasError('min')) &&
+            reviewForm.get('rating')?.touched)
+        {
+            <p>Rating must be between 0.5 and 5 stars.</p>
+        } @else if (reviewForm.get('rating')?.hasError?.('notMultipleOfHalf')) 
+        {
+            <p>Rating must be a multiple of 0.5.</p>
+        }
+      </div>
+      <div>
+        <label for="comment">Comment</label>
+        <input type="text" id="comment" formControlName="comment" />
+        @if (
+            reviewForm.get('comment')?.hasError('maxlength') &&
+            reviewForm.get('comment')?.touched) 
+        {
+            <p>The comment cannot be longer than 700 characters.</p>
+        }
+      </div>
+    </div>
+    <!-- FOOTER -->
+    <div class="footer-modal">
+      <button type="submit">{{review()?.id ? 'Update' : 'Add'}}</button>
+    </div>
+  </form>
+</div>
