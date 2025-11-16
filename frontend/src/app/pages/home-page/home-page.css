@@ -1,4 +1,4 @@
-/* ? ======== Sección Logo ======== */
+/* * ======== Section | Logo ======== */
 .logo-section {
     position: relative;
     text-align: center;
@@ -7,58 +7,63 @@
 }
 
 .main-logo {
-    width: 40rem;
-    margin: 2%;
+    width: clamp(14rem, 50vw, 40rem);
+    margin: 2% auto;
     pointer-events: none;
     user-select: none;
+    display: block;
 }
 
-/* ? ======== Sección general ======== */
+/* * ======== Section | Carousel ======== */
 .carousel-section {
     position: relative;
-    max-width: 60rem;
+    width: 100%;
+    max-width: 70rem;
     margin: 0 auto 3rem auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
 }
 
 .carousel-section h3 {
     text-align: center;
     padding: 0.5rem;
-    margin-bottom: 1rem;
-    font-size: 2.5rem;
+    margin-bottom: 1.2rem;
+    font-size: clamp(1.4rem, 4vw, 2.5rem);
     color: var(--brown-light);
     background-color: var(--green-semi-dark);
     border-radius: 10px;
-    border: var(--brown-dark) 0.5rem solid;
+    border: 0.5rem solid var(--brown-dark);
 }
 
-/* ? ======== Marco visual ======== */
+/* ? ------- Carousel Wrapper ------- */
 .carousel-wrapper {
     position: relative;
-    border: var(--brown-dark) 0.5rem solid;
+    border: 0.5rem solid var(--brown-dark);
     border-radius: 1rem;
     background-color: var(--green-semi-dark);
-    padding: 2rem;
+    padding: 1.2rem;
     overflow: hidden;
 }
 
-/* ? ======== Carrusel desplazable ======== */
+/* * ======== Elemento | Carousel ======== */
 .carousel {
     display: flex;
-    justify-content: center;
     gap: 1rem;
-    padding: 2rem;
+    padding: 1.2rem;
     background-color: var(--brown-mid);
-    border: var(--brown-dark) 0.5rem solid;
+    border: 0.5rem solid var(--brown-dark);
     border-radius: 1rem;
     transition: transform 0.8s ease-in-out;
+    overflow: hidden;
+    white-space: nowrap;
     will-change: transform;
 }
 
-/* ? ======== Tarjeta de película ======== */
+/* * ======== Elemento | Movie Card ======== */
 .movie-card {
-    flex: 0 0 calc(25% - 1rem);
-    border: var(--brown-dark) 4px solid;
+    flex: 1 1 calc(25% - 1rem);
+    max-width: calc(25% - 1rem);
+    min-width: 10rem;
+    border: 4px solid var(--brown-dark);
     border-radius: 0.8rem;
     background-color: var(--brown-dark);
     overflow: hidden;
@@ -67,31 +72,30 @@
 }
 
 .movie-card:hover {
-    z-index: 5;
     transform: scale(1.08);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
+/* ? ------- Image Wrapper ------- */
 .img-wrapper {
     position: relative;
-    aspect-ratio: 2 / 3;
+    aspect-ratio: 2/3;
     overflow: hidden;
 }
 
 .img-wrapper img {
-    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+/* ? ------- Information ------- */
 .info-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     padding: 4px;
-    width: 100%;
     background: rgba(0, 0, 0, 0.8);
     color: #fff;
     opacity: 0;
@@ -102,24 +106,23 @@
     opacity: 1;
 }
 
-/* ? ======== Botones de navegación ======== */
+/* * ======== Elemento | Navigation Buttons ======== */
 .nav-btn {
     position: absolute;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     top: 45%;
     z-index: 7;
-    display: block;
     width: 3rem;
     height: 3rem;
-    font-size: 2rem;
+    font-size: 1.6rem;
     text-align: center;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: var(--brown-dark);
     color: var(--brown-light);
     border: none;
     border-radius: 50%;
     opacity: 0.9;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .nav-btn:hover {
@@ -137,14 +140,41 @@
     right: 0.4rem;
 }
 
+/* ! __________ Responsive __________ */
+@media (max-width: 64rem) {
+    .movie-card {
+        flex: 1 1 calc(33% - 1rem);
+        max-width: calc(33% - 1rem);
+    }
+}
+
 @media (max-width: 48rem) {
     .carousel-section {
         padding: 0 1rem;
     }
+
+    .movie-card {
+        flex: 1 1 calc(50% - 1rem);
+        max-width: calc(50% - 1rem);
+    }
+
+    .nav-btn {
+        top: 42%;
+        width: 2.5rem;
+        height: 2.5rem;
+    }
 }
 
 @media (max-width: 30rem) {
-    .carousel-section h3 {
+    .movie-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .nav-btn {
+        top: 40%;
+        width: 2.2rem;
+        height: 2.2rem;
         font-size: 1.3rem;
     }
 }

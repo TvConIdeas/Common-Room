@@ -1,0 +1,18 @@
+<form [formGroup]="loginForm" (submit)="onSubmit()">
+    @if (loginError) {
+        <p>Acceso inválido. Por favor, ingrese nuevamente.</p>
+    }
+    <div>
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password">
+    </div>
+    <button [disabled]="loginForm.invalid">Login</button>
+    <p>
+        Don't have an account?
+        <a routerLink="/register">Register</a>
+    </p>
+</form>
