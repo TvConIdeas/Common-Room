@@ -9,6 +9,7 @@ import { SearchPage } from './pages/search-page/search-page';
 import { guestGuard } from './guards/guest-guard';
 import { RegisterPage } from './pages/register-page/register-page';
 import { authGuard } from './guards/auth-guard';
+import { NotFound } from './pages/not-found/not-found';
 
 export const routes: Routes = [
     {path: '', component: HomePage, title:"Home | Common Room"},
@@ -23,5 +24,8 @@ export const routes: Routes = [
   
     //Cualquier otra ruta redirige a home
     {path: '', redirectTo: '/', pathMatch: 'full'},
+
+    //Ruta not found
+    {path: '**', component: NotFound}
 ];
 
