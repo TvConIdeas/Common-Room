@@ -1,13 +1,11 @@
 <div class="movie-sheet-container">
   <!-- ! Si la pelicula existe -->
   @if (chosenMovie) {
-
-    <!-- ! --- Background Personalizado --- -->
+    <!-- ? --- Fondo Personalizado --- -->
     @if (chosenMovie.backdropUrl) {
-      <div
-        class="backdrop-img"
-        [style.backgroundImage]="'url(' + chosenMovie.backdropUrl + ')'"
-      ></div>
+      <div class="bg-wrapper">
+        <img [src]="chosenMovie.backdropUrl" alt="Movie backdropUrl" class="bg-img" />
+      </div>
     }
 
     <!-- * ========== Informacion de Pelicula ========== -->
@@ -22,31 +20,25 @@
         </div>
         <div class="info-wrapper">
           <h2>{{ chosenMovie.title }}</h2>
-          <h4>{{ chosenMovie.voteAverage }}</h4>
+          <h4> Average Rating : {{ chosenMovie.voteAverage }}</h4>
         </div>
       </div>
     </section>
 
     <!-- * ========== Detalles de Pelicula ========== -->
     <section class="details-section">
-      <!-- <button [class.active]="activeTab === 'Synopsis'" (click)="setActiveTab('details')" >
-        Synopsis
-      </button>
-
-      <button [class.active]="activeTab === 'details'" (click)="setActiveTab('details')" >
-        Details
-      </button> -->
-
-      <div class="tab-synopsis">
+      <div class="synopsis-container">
+        <h1>Synopsis</h1>
         <p>{{chosenMovie.synopsis}}</p>
       </div>
 
-      <div class="tab-details">
-        <p>{{chosenMovie.releaseDate}}</p>
-        <p>{{chosenMovie.duration}}</p>
-        <p>{{chosenMovie.genres?.join(', ')}}</p>
-        <p>{{chosenMovie.revenue}}</p>
-        <p>{{chosenMovie.budget}}</p>
+      <div class="info-movie-container">
+        <h1>Details</h1>
+        <p>Release Date : {{chosenMovie.releaseDate}}</p>
+        <p>Duration : {{chosenMovie.duration}}</p>
+        <p>Genres : {{chosenMovie.genres?.join(', ')}}</p>
+        <p>Revenue : {{chosenMovie.revenue}}$</p>
+        <p>Budget : {{chosenMovie.budget}}$</p>
       </div>
     </section>
 
@@ -56,7 +48,7 @@
       <h2 class="title-reviews">People's thoughts</h2>
 
       <!-- ? === Boton "Nueva reseña" === -->
-      <button (click)="openReviewModal()">Review +</button>
+      <button (click)="openReviewModal()" class="addReview-button">Review +</button>
       
       <!-- ! === Modal "New Review" | "Edit Review" === -->
       @if (isModalOpen()) {
@@ -67,7 +59,7 @@
       <!-- ? === Listado de Reviews === -->
       <div class="reviews-container">
         @if (reviews.length === 0) {
-          <h2>No hay reseñas todavía</h2>
+          <h2 class="no-reviews">No reviews yet</h2>
         } @else {
           @for (review of reviews; track review.id) {
             <div class="review-card">

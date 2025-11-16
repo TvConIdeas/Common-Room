@@ -1,7 +1,27 @@
-/* * ======== Movie Sheet | Contenedor Principal ======== */
+/* ! ------- Background Image ------- */
+.bg-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50em;
+    overflow: hidden;
+    z-index: -10;
+}
+
+.bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    opacity: 0.6;
+    /* Mascaras que permiten conseguir el "fade" en la imagen */
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+}
+
+/* * ======== Container | Movie Sheet ======== */
 .movie-sheet-container {
-    max-width: 86rem; /* 1376px aprox */
-    margin: 1.5rem auto;
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
@@ -9,7 +29,7 @@
     box-sizing: border-box;
 }
 
-/* * ======== Section | Movie (Header vertical - Opción 2) ======== */
+/* * ======== Section | Movie General Information ======== */
 .movie-section {
     display: flex;
     flex-direction: column;
@@ -18,25 +38,24 @@
     width: 100%;
 }
 
-/* ? ------- Poster + wrapper ------- */
+/* * ======== Container | Poster ======== */
 .poster-container {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     align-items: center;
     width: 100%;
-    max-width: 44rem; /* para no quedar demasiado ancho en desktop */
     margin: 0 auto;
 }
 
-/* ? --- Image wrapper con aspect-ratio 2:3 --- */
+/* ? --- Image wrapper --- */
 .img-wrapper {
     width: 100%;
-    max-width: 22rem; /* 352px */
+    max-width: 25rem; 
     aspect-ratio: 2 / 3;
     overflow: hidden;
     border-radius: 0.75rem;
-    border: 4px solid var(--brown-mid);
+    border: 0.3rem solid var(--brown-mid);
     box-shadow: 0 8px 24px rgba(0,0,0,0.35);
     background-color: var(--brown-dark);
 }
@@ -49,36 +68,48 @@
     user-select: none;
 }
 
-/* ? --- Info wrapper (título + rating) --- */
+/* ? --- Info wrapper --- */
 .info-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
     align-items: center;
     text-align: center;
     padding: 0 0.5rem;
 }
 
+/* --- Movie Title --- */
 .info-wrapper h2 {
-    font-size: 1.75rem;
-    line-height: 1.05;
-    color: var(--brown-mid);
-    letter-spacing: -0.5px;
-    margin: 0;
+    text-align: center;
+    font-size: 2rem;
+    color: var(--text-light);
+    letter-spacing: -2px;
     word-break: break-word;
+    margin-bottom: 0.3rem;
     text-shadow:
-        1px 1px 0 var(--green-light),
-        -1px -1px 0 var(--green-light);
+        1px 1px 0 var(--green-dark),
+        -1px -1px 0 var(--green-dark),
+        1px -1px 0 var(--green-dark),
+        -1px 1px 0 var(--green-dark);
+    transition: 0.7s ease;  
 }
 
+.info-wrapper h2:hover {
+    letter-spacing: 1px;
+    color: var(--brown-light);
+    text-decoration: underline;
+    font-variation-settings: "wght" 582;
+}
+
+/* --- Average Rating --- */
 .info-wrapper h4 {
     font-size: 1rem;
-    color: var(--green-mid);
-    font-weight: 600;
-    margin: 0;
+    color: var(--text-light);
+    background-color: var(--brown-dark);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
 }
 
-/* * ======== Section | Detalles de Pelicula ======== */
+/* * ======== Section | Movie Details ======== */
 .details-section {
     display: flex;
     flex-direction: column;
@@ -88,33 +119,37 @@
     margin: 0 auto;
     padding: 1rem;
     border-radius: 0.75rem;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
     border: 2px solid rgba(0,0,0,0.06);
     box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+
+    color: var(--text-light);
+    background-color: var(--green-semi-dark);
+    border: 0.5rem solid var(--brown-dark);    
 }
 
-/* ? --- Tab blocks (mostrados en columna) --- */
-.tab-synopsis,
-.tab-details {
+/* ? --- Synopsis and Info | Container --- */
+.synopsis-container,
+.info-movie-container {
+    background-color: var(--brown-mid);
+    border: 0.5rem solid var(--brown-dark);
+    border-radius: 1rem;
     padding: 0.85rem;
     border-radius: 0.5rem;
-    background-color: rgba(255,255,255,0.02);
-    color: var(--text-dark);
     box-shadow: inset 0 0 0 1px rgba(0,0,0,0.03);
 }
 
-/* ? --- Sinopsis --- */
-.tab-synopsis p {
+/* ? --- Synopsis --- */
+.synopsis-container p {
     font-size: 1rem;
     line-height: 1.5;
     color: #222;
     white-space: pre-wrap;
 }
 
-/* ? --- Detalles listados --- */
-.tab-details p {
+/* ? --- Info --- */
+.info-movie-container p {
     font-size: 0.95rem;
-    color: #222;
+    color: var(--text-dark);
     margin: 0.25rem 0;
 }
 
@@ -128,65 +163,70 @@
     gap: 0.85rem;
     padding: 1rem;
     border-radius: 0.75rem;
-    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.01));
-    border: 2px solid rgba(0,0,0,0.05);
     box-shadow: 0 6px 18px rgba(0,0,0,0.14);
+
+    color: var(--text-light);
+    background-color: var(--green-semi-dark);
+    border: 0.5rem solid var(--brown-dark);    
 }
 
 /* ? --- Titulo de reseñas --- */
 .title-reviews {
-    font-size: 1.25rem;
-    text-align: left;
+    font-size: 2rem;
+    text-align: center;
     margin: 0;
-    color: var(--green-mid);
+    color: var(--green-light);
     padding-bottom: 0.25rem;
 }
 
-/* ? --- Boton "Nueva reseña" --- */
-.reviews-section > button,
-.reviews-section button {
-    justify-self: start;
-    align-self: flex-start;
+/* * ======== Element | Add Review Button ======== */
+.addReview-button{
+    align-self: center;
     padding: 0.5rem 1rem;
     border-radius: 1rem;
     border: none;
     cursor: pointer;
+    font-size: 1.5rem;
     background: var(--green-mid);
     color: var(--text-light);
-    font-weight: 700;
     letter-spacing: 0.2px;
-    transition: transform 0.18s ease, filter 0.18s ease;
+    transition: all 0.18s ease-in-out;
     box-shadow: 0 6px 16px rgba(37, 50, 34, 0.18);
 }
 
-.reviews-section > button:hover,
-.reviews-section button:hover {
-    transform: translateY(-3px) scale(1.02);
+.addReview-button:hover {
+    transform: scale(1.2);
+    background-color: var(--green-light);
+    color: var(--brown-dark);
     filter: brightness(1.05);
 }
 
-/* ! --- Si el modal es un componente, podés alinearlo desde aquí si su host lo permite --- */
-app-review-modal {
-    display: block;
-}
-
-/* ? --- Contenedor de reseñas --- */
+/* ? --- Reviews | Container --- */
 .reviews-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 0.75rem;
     margin-top: 0.25rem;
 }
 
-/* ? --- Mensaje cuando está vacío --- */
-.reviews-container h2 {
-    font-size: 1rem;
-    color: #555;
+/* ! --- No Reviews --- */
+.no-reviews {
+    display: block;
+    align-items: center;    
+    padding: 1.2rem 4rem;
+    max-width: 60%;
     text-align: center;
-    padding: 0.75rem 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    background: rgb(150, 84, 84);
+    border: 0.3em solid rgb(134, 10, 10);
+    border-radius: 0.7rem;
+    user-select: none;
 }
 
-/* ? --- Tarjeta de reseña --- */
+/* * ======== Element | Review Card ======== */
 .review-card {
     padding: 0.85rem;
     border-radius: 0.6rem;
@@ -198,28 +238,23 @@ app-review-modal {
     gap: 0.5rem;
 }
 
-/* ? --- Contenido dentro de la reseña --- */
+/* ? --- Review Comment --- */
 .review-card h2 {
     font-size: 0.95rem;
     margin: 0;
     color: var(--green-dark);
 }
 
+/* ? --- Review Rating --- */
 .review-card .rating {
     font-weight: 700;
     color: var(--brown-mid);
 }
 
-/* * ======== Helpers y pequeños ajustes ======== */
-.movie-sheet-container a,
-.movie-sheet-container button {
-    font-family: inherit;
-}
-
-/* * ======== Responsive ======== */
+/* ! __________ Responsive __________ */
 @media (min-width: 720px) {
     .info-wrapper h2 { font-size: 2rem; }
-    .img-wrapper { max-width: 26rem; } /* poster más grande en tablet+ */
+    .img-wrapper { max-width: 26rem; } 
     .reviews-section { padding: 1.25rem; }
 }
 
