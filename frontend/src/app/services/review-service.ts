@@ -23,7 +23,7 @@ export class ReviewService {
   
   //DELETE review
   deleteReview(reviewId: number): Observable<void>{
-    return this.http.delete<void>(`${this.URL}/review/${reviewId}`)
+    return this.http.delete<void>(`${this.URL}/reviews/${reviewId}`)
   }
   
   //GET reviews por película

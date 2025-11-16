@@ -70,4 +70,5 @@ export class ReviewModal implements OnInit {
   closeModal() {
     this.close.emit();
   }
+
 }
