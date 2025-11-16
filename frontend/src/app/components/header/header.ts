@@ -47,6 +47,4 @@ export class Header implements OnInit{
     alert('Cerrando sesión...')
     this.auth.logout()
   }
-
-
 }
