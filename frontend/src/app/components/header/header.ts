@@ -13,6 +13,7 @@ export class Header implements OnInit{
   // * ---- Variables----
   searchForm !: FormGroup
   isLoggedIn : boolean = false;
+  currentUser: string | null = null
 
   // * ====== Contructor | ngOnInit ======
   constructor(
@@ -25,6 +26,7 @@ export class Header implements OnInit{
     // Se ejecuta al inicio y se actualiza cada vez que cambie el estado (en auth service)
     this.auth.loggedIn$.subscribe(value => {
       this.isLoggedIn = value;
+      this.currentUser = this.auth.getUsername()
     });
 
     this.searchForm = this.fb.group({

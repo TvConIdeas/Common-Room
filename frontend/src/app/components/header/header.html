@@ -15,7 +15,7 @@
         <div class="info-container">
             @if (isLoggedIn) {
                 <ul>    
-                    <li routerLink="/users/me">Profile</li>
+                    <li [routerLink]="['/users', currentUser]">Profile</li>
                     <li (click)="logout()">Logout</li>
                 </ul>
             }
