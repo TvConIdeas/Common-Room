@@ -64,7 +64,7 @@
           @for (review of reviews; track review.id) {
             <div class="review-card">
               <!-- === Review Header === -->
-              <header [routerLink]="['/users', review.userPreview.username]">
+              <div class="review-header" [routerLink]="['/users', review.userPreview.username]">
                     @if (review.userPreview.role === 'ADMIN') {
                       <img
                         [src]="review.userPreview.profilePictureUrl || 'assets/img/userAdmin.jpg'"
@@ -79,10 +79,10 @@
                       />
                     }      
                     <h2>Review By <strong>{{review.userPreview.username}}</strong></h2>
-              </header>
+              </div>
 
               <!-- === Review Body === -->
-              <body>
+              <div class="review-body">
                 <!-- === Stars Rating === -->
                 <div class="star-container">
                   @for (i of [1,2,3,4,5]; track i) {
@@ -104,12 +104,12 @@
                     <p>{{review.comment}}</p>
                   }
                 </div>
-              </body>
+              </div>
               <!-- === Review Footer === -->
-              <footer>
+              <div class="review-footer">
                 <h3>Reviewed on</h3>
                 <h2>{{review.createdAt}}</h2>
-              </footer>
+              </div>
             </div>
           }
         }

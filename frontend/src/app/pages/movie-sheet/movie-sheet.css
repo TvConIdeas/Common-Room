@@ -1,12 +1,13 @@
 /* ! ------- Background Image ------- */
 .bg-wrapper {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
+    z-index: -10;
+
     width: 100%;
     height: 50em;
     overflow: hidden;
-    z-index: -10;
 }
 
 .bg-img {
@@ -14,36 +15,45 @@
     height: 100%;
     object-fit: cover;
     object-position: center top;
+
     opacity: 0.6;
-    /* Mascaras que permiten conseguir el "fade" en la imagen */
     -webkit-mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
 }
 
 /* * ======== Container | Movie Sheet ======== */
 .movie-sheet-container {
-    padding: 1.25rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1.25rem;
+
+    width: 100%;
+    padding: 1.25rem;
+
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 /* * ======== Section | Movie General Information ======== */
 .movie-section {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     align-items: center;
+    gap: 1rem;
+
     width: 100%;
+    max-width: 90rem;
+    margin: 0 auto;
 }
 
 /* * ======== Container | Poster ======== */
 .poster-container {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
     align-items: center;
+    gap: 0.75rem;
+
     width: 100%;
     margin: 0 auto;
 }
@@ -51,17 +61,19 @@
 /* ? --- Image wrapper --- */
 .img-wrapper {
     width: 100%;
-    max-width: 25rem; 
+    max-width: 25rem;
     aspect-ratio: 2 / 3;
-    overflow: hidden;
-    border-radius: 0.75rem;
+
     border: 0.3rem solid var(--brown-mid);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    border-radius: 0.75rem;
+
     background-color: var(--brown-dark);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+
+    overflow: hidden;
 }
 
 .img-wrapper img {
-    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -73,24 +85,27 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+
+    width: 100%;
     padding: 0 0.5rem;
+
+    text-align: center;
 }
 
-/* --- Movie Title --- */
 .info-wrapper h2 {
-    text-align: center;
+    margin-bottom: 0.3rem;
+
     font-size: 2rem;
-    color: var(--text-light);
     letter-spacing: -2px;
     word-break: break-word;
-    margin-bottom: 0.3rem;
+
+    color: var(--text-light);
+    transition: 0.7s ease;
     text-shadow:
         1px 1px 0 var(--green-dark),
         -1px -1px 0 var(--green-dark),
         1px -1px 0 var(--green-dark),
         -1px 1px 0 var(--green-dark);
-    transition: 0.7s ease;  
 }
 
 .info-wrapper h2:hover {
@@ -100,13 +115,13 @@
     font-variation-settings: "wght" 582;
 }
 
-/* --- Average Rating --- */
 .info-wrapper h4 {
+    padding: 0.25rem 0.5rem;
     font-size: 1rem;
     color: var(--text-light);
-    background-color: var(--brown-dark);
-    padding: 0.25rem 0.5rem;
+
     border-radius: 0.5rem;
+    background-color: var(--brown-dark);
 }
 
 /* * ======== Section | Movie Details ======== */
@@ -114,226 +129,312 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 100%;
+
+    width: 95%;
+    margin: 0 auto;
     max-width: 70rem;
     margin: 0 auto;
     padding: 1rem;
-    border-radius: 0.75rem;
-    border: 2px solid rgba(0,0,0,0.06);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
 
     color: var(--text-light);
     background-color: var(--green-semi-dark);
-    border: 0.5rem solid var(--brown-dark);    
+
+    border: 0.5rem solid var(--brown-dark);
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
-/* ? --- Synopsis and Info | Container --- */
 .synopsis-container,
 .info-movie-container {
-    background-color: var(--brown-mid);
-    border: 0.5rem solid var(--brown-dark);
-    border-radius: 1rem;
     padding: 0.85rem;
+
+    border: 0.5rem solid var(--brown-dark);
     border-radius: 0.5rem;
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.03);
+
+    background-color: var(--brown-mid);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.03);
 }
 
-/* ? --- Synopsis --- */
 .synopsis-container p {
     font-size: 1rem;
     line-height: 1.5;
-    color: #222;
     white-space: pre-wrap;
-}
-
-/* ? --- Info --- */
-.info-movie-container p {
-    font-size: 0.95rem;
-    color: var(--text-dark);
-    margin: 0.25rem 0;
+    color: #222;
 }
 
 /* * ======== Section | Reviews ======== */
 .reviews-section {
-    width: 100%;
-    max-width: 70rem;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
+    gap: 1rem;
+
+    width: 95%;
+    margin: 0 auto;
+    max-width: 70rem;
+    margin: 0 auto;
     padding: 1rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.14);
 
     color: var(--text-light);
     background-color: var(--green-dark);
-    border: 0.5rem solid var(--brown-dark);    
+
+    border: 0.5rem solid var(--brown-dark);
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
 }
 
-/* ? --- Titulo de reseñas --- */
+/* ? --- Title reviews --- */
 .title-reviews {
+    margin: 0;
+    padding-bottom: 0.25rem;
+
     font-size: 2rem;
     text-align: center;
-    margin: 0;
     color: var(--green-light);
-    padding-bottom: 0.25rem;
 }
 
 /* * ======== Element | Add Review Button ======== */
-.addReview-button{
+.addReview-button {
     align-self: center;
+
     padding: 0.5rem 1rem;
-    border-radius: 1rem;
-    border: none;
-    cursor: pointer;
     font-size: 1.5rem;
-    background: var(--green-mid);
     color: var(--text-light);
-    letter-spacing: 0.2px;
+
+    border: none;
+    border-radius: 1rem;
+
+    background: var(--green-mid);
+    cursor: pointer;
+
     transition: all 0.2s ease-in-out;
     box-shadow: 0 6px 16px rgba(37, 50, 34, 0.18);
 }
 
 .addReview-button:hover {
     transform: scale(1.2);
-    background-color: var(--green-light);
     color: var(--brown-dark);
-    filter: brightness(1.05);
+    background-color: var(--green-light);
 }
 
-/* ? --- Reviews | Container --- */
+/* ? --- Reviews Container --- */
 .reviews-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
-    margin-top: 0.25rem;
-}
 
-/* ! --- No Reviews --- */
-.no-reviews {
-    display: block;
-    align-items: center;    
-    padding: 1.2rem 4rem;
-    max-width: 60%;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-    background: rgb(150, 84, 84);
-    border: 0.3em solid rgb(134, 10, 10);
-    border-radius: 0.7rem;
-    user-select: none;
+    width: 100%;
+    margin-top: 0.25rem;
 }
 
 /* * ======== Element | Review Card ======== */
 .review-card {
-    background-color: var(--brown-mid);
-    margin-bottom: 2rem;
-    border-radius: 1rem; 
-    width: 90%;
-    color: var(--text-light);
-    border: 0.5rem solid var(--brown-dark);
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
+
+    width: 90%;
+    margin: 1rem 2rem;
+    color: var(--text-light);
+    background-color: var(--brown-mid);
+
+    border: 0.5rem solid var(--brown-dark);
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+
     overflow: hidden;
 }
 
-/* ? --- Review Header (Adaptado) --- */
-.review-card header {
-    margin: 0.5rem;
-    padding: 0.7rem 1rem 0.7rem 1rem;
-    border-radius: 0.5rem;
+/* ? --- HEADER --- */
+.review-header {
     display: flex;
     align-items: center;
+    gap: 0.7rem;
+
+    margin: 0.5rem;
+    padding: 0.7rem 1rem;
+
     background-color: var(--brown-light);
-    gap: 0.7rem; 
+    border-radius: 0.5rem;
     cursor: pointer;
 }
 
-.review-card header img {
+.review-header img {
     width: 2.5rem;
     height: 2.5rem;
-    border-radius: 50%;
+
     object-fit: cover;
+
     border: 0.3rem solid var(--brown-dark);
+    border-radius: 50%;
     flex-shrink: 0;
 }
 
-.review-card header h2 {
-    font-size: 1em;
-    color: var(--text-dark);
+.review-header h2 {
     margin: 0;
+    font-size: 1em;
     line-height: 1.2;
+    color: var(--text-dark);
     flex-grow: 1;
 }
 
-.review-card header h2 strong {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: var(--text-light);
+.review-header h2 strong {
     display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--text-light);
 }
 
-/* ? --- Review Body (Adaptado) --- */
-.review-card body {
-    margin: 0.5rem;
-    background-color: var(--green-dark);
+/* ? --- BODY --- */
+.review-body {
     display: flex;
     flex-direction: column;
+
+    margin: 0.5rem;
+    background-color: var(--green-dark);
 }
 
-/* --- Stars Rating (review-rating-stars) --- */
-.review-card .star-container {
+.star-container {
     display: flex;
-    color: rgb(230, 230, 108);
     align-items: center;
+
+    padding: 0.7rem 0 0.7rem 1rem;
     font-size: 1.5rem;
-    padding: 0.7rem 0rem 0.7rem 1rem;
+
+    color: rgb(230, 230, 108);
     background-color: var(--brown-dark);
 }
 
-.review-card .star , 
-.review-card .half-star, 
-.review-card .empty-star {
-    font-style: normal;
-    display: inline-block;
-}
-
-/* --- Review Comment --- */
-.review-card .comment-section {
+.comment-section {
     padding: 1rem;
     background-color: var(--brown-light);
 }
 
-.review-card .comment-section p {
-    color: var(--text-dark);
-    font-size: 1rem;
+.comment-section p {
     margin: 0;
+    font-size: 1rem;
+    color: var(--text-dark);
 }
 
-/* ? --- Review Footer (Adaptado) --- */
-.review-card footer {
-    margin: 0.5rem;
+/* ? --- FOOTER --- */
+.review-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--brown-light);
+
+    margin: 0.5rem;
+    padding: 0.7rem 1rem;
+
     font-size: 1em;
-    padding: 0.7rem 1rem 0.7rem 1rem;
     color: var(--text-dark);
+
+    background-color: var(--brown-light);
+    border-radius: 0.5rem;
 }
 
-.review-card footer h3 {
+.review-footer h3 {
     font-weight: normal;
     text-decoration: underline;
 }
 
-.review-card footer h2 {
+.review-footer h2 {
     font-size: 0.9em;
     font-weight: bold;
     text-align: right;
 }
 
 /* ! __________ Responsive __________ */
+/* ======== MOVILES (max-width: 600px) ======== */
+@media (max-width: 600px) {
+    /* Poster e info */
+    .img-wrapper {
+        max-width: 18rem;
+        border-width: 0.25rem;
+    }
+
+    .info-wrapper h2 {
+        font-size: 1.6rem;
+    }
+
+    .info-wrapper h4 {
+        font-size: 0.9rem;
+    }
+
+    /* Review card FULL WIDTH como DETAILS */
+    .review-card {
+        width: 100%;
+        max-width: 100%;   /* importante */
+        margin-bottom: 1.5rem;
+    }
+
+    .review-header img {
+        width: 2.2rem;
+        height: 2.2rem;
+        border-width: 0.2rem;
+    }
+
+    .review-header h2 {
+        font-size: 0.9rem;
+    }
+
+    .review-header h2 strong {
+        font-size: 1rem;
+    }
+
+    .star-container {
+        font-size: 1.3rem;
+        padding-left: 0.75rem;
+    }
+
+    .comment-section {
+        padding: 0.75rem;
+    }
+
+    .comment-section p {
+        font-size: 0.95rem;
+    }
+
+    .review-footer {
+        padding: 0.6rem 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .review-footer h2 {
+        font-size: 0.8rem;
+    }
+
+    .addReview-button {
+        font-size: 1.2rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+/* ======== TABLETS (600px a 900px) ======== */
+@media (min-width: 600px) and (max-width: 900px) {
+    .img-wrapper {
+        max-width: 22rem;
+    }
+
+    .review-card {
+        width: 100%;
+        max-width: 100%; /* FULL */
+    }
+
+    .info-wrapper h2 {
+        font-size: 1.9rem;
+    }
+}
+
+/* ======== SCREENS GRANDES (mín 1200px) ======== */
+@media (min-width: 1200px) {
+
+    .img-wrapper {
+        max-width: 28rem;
+    }
+
+    /* Igualar ancho reviews = details */
+    .details-section,
+    .reviews-section {
+        width: 95%;
+        max-width: 70rem;
+    }
+}
