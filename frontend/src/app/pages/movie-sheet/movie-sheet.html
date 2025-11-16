@@ -63,16 +63,58 @@
         } @else {
           @for (review of reviews; track review.id) {
             <div class="review-card">
-              <h2>{{review.userPreview.username}}</h2>
-              <h2>{{review.rating}}</h2>
-              <h2>{{review.comment}}</h2>
-              <h2>{{review.createdAt}}</h2>
+              <!-- === Review Header === -->
+              <header [routerLink]="['/users', review.userPreview.username]">
+                    @if (review.userPreview.role === 'ADMIN') {
+                      <img
+                        [src]="review.userPreview.profilePictureUrl || 'assets/img/userAdmin.jpg'"
+                        alt="{{ review.userPreview.username || 'Poster not available' }}"
+                        (error)="noProfilePicture($event)"
+                      />
+                    } @else {
+                      <img
+                        [src]="review.userPreview.profilePictureUrl || 'assets/img/userv2.jpg'"
+                        alt="{{ review.userPreview.username || 'Poster not available' }}"
+                        (error)="noProfilePicture($event)"
+                      />
+                    }      
+                    <h2>Review By <strong>{{review.userPreview.username}}</strong></h2>
+              </header>
+
+              <!-- === Review Body === -->
+              <body>
+                <!-- === Stars Rating === -->
+                <div class="star-container">
+                  @for (i of [1,2,3,4,5]; track i) {
+                    @if (i <= review.rating) {
+                      <span class="star">★</span>
+                    }
+                    @else if (i - review.rating === 0.5) {
+                      <span class="half-star">⯪</span>
+                    } 
+                    @else {
+                      <span class="empty-star">☆</span>
+                    }
+                  }
+                </div>
+                <div class="comment-section">
+                  @if (review.comment == null) {
+                    <p><em>No comment provided</em></p>
+                  } @else {
+                    <p>{{review.comment}}</p>
+                  }
+                </div>
+              </body>
+              <!-- === Review Footer === -->
+              <footer>
+                <h3>Reviewed on</h3>
+                <h2>{{review.createdAt}}</h2>
+              </footer>
             </div>
           }
         }
       </div>
     </section>
-
   } @else {
     <h3>No movie was found with that title</h3>
   }

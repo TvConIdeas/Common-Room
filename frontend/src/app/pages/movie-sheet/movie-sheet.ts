@@ -1,5 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MovieService } from '../../services/movie-service';
 import { MovieDetails } from '../../models/MovieDetails';
 import { Review } from '../../models/Review';
@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-movie-sheet',
-  imports: [ReviewModal],
+  imports: [ReviewModal, RouterLink],
   templateUrl: './movie-sheet.html',
   styleUrl: './movie-sheet.css'
 })
@@ -70,4 +70,11 @@ export class MovieSheet implements OnInit{
     const img = event.target as HTMLImageElement;
     img.src = 'assets/img/default-poster.jpg';
   }
+
+  // * -------- Metodo para reemplazar posters sin imagen --------
+  noProfilePicture(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/img/user.png';
+  }
+
 }
