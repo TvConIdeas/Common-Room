@@ -139,4 +139,5 @@ export class ReviewModal implements OnInit {
     const img = event.target as HTMLImageElement;
     img.src = 'assets/img/default-poster.jpg';
   }
+
 }

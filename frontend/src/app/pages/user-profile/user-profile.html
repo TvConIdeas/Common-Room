@@ -24,7 +24,7 @@
                         @if (isModalOpen()) {
                             <app-review-modal (close)="closeReviewModal()" [movie]="review.moviePreview" [review]="review"></app-review-modal>
                         }
-                        <button>Delete</button>
+                        <button (click)="onDeleteReview(review.id)">Delete</button>
                     </div>
                 </div>
             }

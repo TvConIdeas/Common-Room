@@ -20,6 +20,9 @@ export class MovieSheet implements OnInit{
   reviews : Review[] = []
   isModalOpen = signal(false) // Variable reactiva (cuando cambia su valor, Angular actualiza automáticamente la vista)
 
+  isLoggedIn = false
+  currentUsername: string | null = null
+
   // * ======== Contructor | ngOnInit ========
   constructor(private route: ActivatedRoute,
     private mService: MovieService,
@@ -30,6 +33,9 @@ export class MovieSheet implements OnInit{
   ngOnInit(): void {
     // Conseguimos el ID de la pelicula desde la URL
     const movieId = this.route.snapshot.params['id']
+
+    this.isLoggedIn = this.auth.isLoggedIn()
+    this.currentUsername = this.auth.getUsername()
 
     // Cargamos la pelicula y sus reviews
     this.loadMovie(movieId)
@@ -51,6 +57,22 @@ export class MovieSheet implements OnInit{
       next: (data) => {this.reviews = data},
       error: (e) => console.error(e)
     })
+  }
+
+  // ! -------- Metodo para borrar reviews --------
+  onDeleteReview(reviewId : number){
+    if(confirm('Are your sure you want to delete this review?')){
+      this.rService.deleteReview(reviewId).subscribe({
+        next: () => {
+          alert('Review deleted succesfully.')
+          this.loadReviews(this.chosenMovie.id)
+        },
+        error: (e) => {
+          console.error(e)
+          alert('Error deleting review. You might not be the owner.')
+        }
+      })
+    }
   }
 
   // ? ----- Si el usuario tiene una reseña -----
