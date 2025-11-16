@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, finalize, Observable, tap } from 'rxjs';
 import TokenResponse from '../models/TokenResponse';
 import { RegisterRequest } from '../models/RegisterRequest';
 import { Token } from '@angular/compiler';
@@ -37,16 +37,37 @@ export class AuthService {
   }
 
   logout() {
-    this.http.post<void>('http://localhost:8080/logout', {}).subscribe({
-      next: () => {
+    // this.http.post<void>('http://localhost:8080/logout', {}).subscribe({
+    //   next: () => {
+    //     localStorage.removeItem('access_token');
+    //     localStorage.removeItem('refresh_token');
+    //     localStorage.removeItem('username');
+    //     localStorage.removeItem('role');
+    //     this.loggedInSubject.next(false);
+    //     this.router.navigate(['/']);
+    //   },
+    //   error: (e) => console.error(e)
+    // });
+    this.http.post<void>('http://localhost:8080/logout', {}).pipe(
+      // 'finalize' se ejecutará después de 'next' O 'error'
+      finalize(() => {
+        // Esta es la lógica de limpieza que SIEMPRE debe ejecutarse
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         localStorage.removeItem('username');
         localStorage.removeItem('role');
         this.loggedInSubject.next(false);
         this.router.navigate(['/']);
+      })
+    ).subscribe({
+      next: () => {
+        // Bien, el servidor lo procesó
+        console.log('Server logout successful');
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        // No pasa nada, 'finalize' limpiará todo.
+        console.warn('Server logout failed (user likely deleted), forcing local logout.', e);
+      }
     });
   }
 

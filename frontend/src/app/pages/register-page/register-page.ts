@@ -31,6 +31,7 @@ export class RegisterPage implements OnInit{
       next: (data) => {
         alert('Registration successful!')
         this.registerForm.reset()
+        console.log(this.registerForm.value)
         this.router.navigate(['/'])
       },
       error: (e) => {console.error(e)}
