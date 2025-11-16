@@ -1,0 +1,231 @@
+/* * ======== Movie Sheet | Contenedor Principal ======== */
+.movie-sheet-container {
+    max-width: 86rem; /* 1376px aprox */
+    margin: 1.5rem auto;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    box-sizing: border-box;
+}
+
+/* * ======== Section | Movie (Header vertical - Opción 2) ======== */
+.movie-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+}
+
+/* ? ------- Poster + wrapper ------- */
+.poster-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+    width: 100%;
+    max-width: 44rem; /* para no quedar demasiado ancho en desktop */
+    margin: 0 auto;
+}
+
+/* ? --- Image wrapper con aspect-ratio 2:3 --- */
+.img-wrapper {
+    width: 100%;
+    max-width: 22rem; /* 352px */
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    border: 4px solid var(--brown-mid);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    background-color: var(--brown-dark);
+}
+
+.img-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+}
+
+/* ? --- Info wrapper (título + rating) --- */
+.info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: center;
+    text-align: center;
+    padding: 0 0.5rem;
+}
+
+.info-wrapper h2 {
+    font-size: 1.75rem;
+    line-height: 1.05;
+    color: var(--brown-mid);
+    letter-spacing: -0.5px;
+    margin: 0;
+    word-break: break-word;
+    text-shadow:
+        1px 1px 0 var(--green-light),
+        -1px -1px 0 var(--green-light);
+}
+
+.info-wrapper h4 {
+    font-size: 1rem;
+    color: var(--green-mid);
+    font-weight: 600;
+    margin: 0;
+}
+
+/* * ======== Section | Detalles de Pelicula ======== */
+.details-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    border: 2px solid rgba(0,0,0,0.06);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+
+/* ? --- Tab blocks (mostrados en columna) --- */
+.tab-synopsis,
+.tab-details {
+    padding: 0.85rem;
+    border-radius: 0.5rem;
+    background-color: rgba(255,255,255,0.02);
+    color: var(--text-dark);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.03);
+}
+
+/* ? --- Sinopsis --- */
+.tab-synopsis p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #222;
+    white-space: pre-wrap;
+}
+
+/* ? --- Detalles listados --- */
+.tab-details p {
+    font-size: 0.95rem;
+    color: #222;
+    margin: 0.25rem 0;
+}
+
+/* * ======== Section | Reviews ======== */
+.reviews-section {
+    width: 100%;
+    max-width: 70rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.01));
+    border: 2px solid rgba(0,0,0,0.05);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.14);
+}
+
+/* ? --- Titulo de reseñas --- */
+.title-reviews {
+    font-size: 1.25rem;
+    text-align: left;
+    margin: 0;
+    color: var(--green-mid);
+    padding-bottom: 0.25rem;
+}
+
+/* ? --- Boton "Nueva reseña" --- */
+.reviews-section > button,
+.reviews-section button {
+    justify-self: start;
+    align-self: flex-start;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+    background: var(--green-mid);
+    color: var(--text-light);
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    transition: transform 0.18s ease, filter 0.18s ease;
+    box-shadow: 0 6px 16px rgba(37, 50, 34, 0.18);
+}
+
+.reviews-section > button:hover,
+.reviews-section button:hover {
+    transform: translateY(-3px) scale(1.02);
+    filter: brightness(1.05);
+}
+
+/* ! --- Si el modal es un componente, podés alinearlo desde aquí si su host lo permite --- */
+app-review-modal {
+    display: block;
+}
+
+/* ? --- Contenedor de reseñas --- */
+.reviews-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+/* ? --- Mensaje cuando está vacío --- */
+.reviews-container h2 {
+    font-size: 1rem;
+    color: #555;
+    text-align: center;
+    padding: 0.75rem 0;
+}
+
+/* ? --- Tarjeta de reseña --- */
+.review-card {
+    padding: 0.85rem;
+    border-radius: 0.6rem;
+    background: var(--bg-light);
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* ? --- Contenido dentro de la reseña --- */
+.review-card h2 {
+    font-size: 0.95rem;
+    margin: 0;
+    color: var(--green-dark);
+}
+
+.review-card .rating {
+    font-weight: 700;
+    color: var(--brown-mid);
+}
+
+/* * ======== Helpers y pequeños ajustes ======== */
+.movie-sheet-container a,
+.movie-sheet-container button {
+    font-family: inherit;
+}
+
+/* * ======== Responsive ======== */
+@media (min-width: 720px) {
+    .info-wrapper h2 { font-size: 2rem; }
+    .img-wrapper { max-width: 26rem; } /* poster más grande en tablet+ */
+    .reviews-section { padding: 1.25rem; }
+}
+
+@media (min-width: 1024px) {
+    .movie-sheet-container { padding: 1.75rem; }
+    .img-wrapper { max-width: 30rem; aspect-ratio: 2 / 3; }
+    .info-wrapper h2 { font-size: 2.5rem; }
+    .tab-details p, .tab-synopsis p { font-size: 1rem; }
+}

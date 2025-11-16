@@ -1,40 +1,87 @@
 <div class="movie-sheet-container">
-  <section>
-    @if(chosenMovie){
-    <h3>{{ chosenMovie.title }}</h3>
-    <img src="{{ chosenMovie.posterUrl }}" alt="movie poster" />
-    <h4>{{ chosenMovie.releaseDate }}</h4>
-    <h4>{{ chosenMovie.synopsis }}</h4>
-    <h4>{{ chosenMovie.duration }}</h4>
-    <h4>{{ chosenMovie.genres }}</h4>
-    <h4>{{ chosenMovie.voteAverage }}</h4>
-    <h4>{{ chosenMovie.budget }}</h4>
-    <h4>{{ chosenMovie.revenue }}</h4>
-    <h4>{{ chosenMovie.backdropUrl }}</h4>
+  <!-- ! Si la pelicula existe -->
+  @if (chosenMovie) {
 
-    <section>
-      <h2>People's thoughts</h2>
-      <!-- boton de modal -->
-       @if () {}
-      <button (click)="openModal()">Review +</button>
-      @if (isModalOpen()) {
-        <app-review-modal (close)="closeModal()" [movie]="chosenMovie"></app-review-modal>
-        <!-- Se le pasa al modal de crear reseña la info de la peli -->
-      } 
-      @if (!reviews) {
-        <p>No hay reseñas todavía</p>
-      }
-      @for (review of reviews; track review.id) {
-        <div>
-          <h2>{{review.userPreview.username}}</h2>
-          <h2>{{review.rating}}</h2>
-          <h2>{{review.comment}}</h2>
-          <h2>{{review.createdAt}}</h2>
-        </div>
-      }
-    </section>
-    } @else{
-    <h3>No movie was found with that title</h3>
+    <!-- ! --- Background Personalizado --- -->
+    @if (chosenMovie.backdropUrl) {
+      <div
+        class="backdrop-img"
+        [style.backgroundImage]="'url(' + chosenMovie.backdropUrl + ')'"
+      ></div>
     }
-  </section>
+
+    <!-- * ========== Informacion de Pelicula ========== -->
+    <section class="movie-section">
+      <div class="poster-container">
+        <div class="img-wrapper">
+          <img
+            [src]="chosenMovie.posterUrl || 'assets/img/default-poster.jpg'"
+            alt="{{ chosenMovie.title || 'Poster not available' }}"
+            (error)="onImgError($event)"
+          />
+        </div>
+        <div class="info-wrapper">
+          <h2>{{ chosenMovie.title }}</h2>
+          <h4>{{ chosenMovie.voteAverage }}</h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- * ========== Detalles de Pelicula ========== -->
+    <section class="details-section">
+      <!-- <button [class.active]="activeTab === 'Synopsis'" (click)="setActiveTab('details')" >
+        Synopsis
+      </button>
+
+      <button [class.active]="activeTab === 'details'" (click)="setActiveTab('details')" >
+        Details
+      </button> -->
+
+      <div class="tab-synopsis">
+        <p>{{chosenMovie.synopsis}}</p>
+      </div>
+
+      <div class="tab-details">
+        <p>{{chosenMovie.releaseDate}}</p>
+        <p>{{chosenMovie.duration}}</p>
+        <p>{{chosenMovie.genres?.join(', ')}}</p>
+        <p>{{chosenMovie.revenue}}</p>
+        <p>{{chosenMovie.budget}}</p>
+      </div>
+    </section>
+
+    <!-- * ========== Seccion de Reviews ========== -->
+    <section class="reviews-section">
+      <!-- ? === Titulo de reseñas === -->
+      <h2 class="title-reviews">People's thoughts</h2>
+
+      <!-- ? === Boton "Nueva reseña" === -->
+      <button (click)="openModal()">Review +</button>
+      
+      <!-- ! === Modal "New Review" | "Edit Review" === -->
+      @if (isModalOpen()) {
+        <!-- Se le pasa al modal de crear reseña la info de la peli -->
+        <app-review-modal (close)="closeModal()" [movie]="chosenMovie"></app-review-modal>
+      } 
+
+      <!-- ? === Listado de Reviews === -->
+      <div class="reviews-container">
+        @if (reviews.length === 0) {
+          <h2>No hay reseñas todavía</h2>
+        } @else {
+          @for (review of reviews; track review.id) {
+            <div class="review-card">
+              <h2>{{review.userPreview.username}}</h2>
+              <h2>{{review.rating}}</h2>
+              <h2>{{review.comment}}</h2>
+              <h2>{{review.createdAt}}</h2>
+            </div>
+          }
+        }
+      </div>
+    </section>
+
+  } @else {
+    <h3>No movie was found with that title</h3>
+  }
 </div>

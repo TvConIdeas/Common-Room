@@ -15,11 +15,12 @@ import { AuthService } from '../../services/auth-service';
 })
 
 export class MovieSheet implements OnInit{
-  
+  // * ======== Variables ========
   chosenMovie!: MovieDetails
-  reviews!: Review[]
+  reviews : Review[] = []
   isModalOpen = signal(false) // Variable reactiva (cuando cambia su valor, Angular actualiza automáticamente la vista)
 
+  // * ======== Contructor | ngOnInit ========
   constructor(private route: ActivatedRoute,
     private mService: MovieService,
     private rService: ReviewService,
@@ -27,13 +28,15 @@ export class MovieSheet implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.reviews = []
-
+    // Conseguimos el ID de la pelicula desde la URL
     const movieId = this.route.snapshot.params['id']
+
+    // Cargamos la pelicula y sus reviews
     this.loadMovie(movieId)
     this.loadReviews(movieId)
   }
 
+  // ! -------- Metodo para cargar la pelicula -------- 
   loadMovie(id: number){
     this.mService.getMovieById(id).subscribe({
       next: (data) => { this.chosenMovie = data },
@@ -41,6 +44,7 @@ export class MovieSheet implements OnInit{
     })
   }
 
+  // ! -------- Metodo para cargar las reviews -------- 
   loadReviews(movieId: number){
     this.rService.getReviewsForMovie(movieId).subscribe({
       next: (data) => {this.reviews = data},
@@ -48,6 +52,11 @@ export class MovieSheet implements OnInit{
     })
   }
 
+  hasReview(){
+    
+  }
+
+  // ! ====== Metodos para el Model ======
   openModal(){
     this.isModalOpen.set(true)
   }
@@ -56,7 +65,9 @@ export class MovieSheet implements OnInit{
     this.isModalOpen.set(false)
   }
 
-  hasReview(){
-    
+  // * -------- Metodo para reemplazar posters sin imagen --------
+  onImgError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/img/default-poster.jpg';
   }
 }
