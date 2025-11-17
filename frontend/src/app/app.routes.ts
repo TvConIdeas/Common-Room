@@ -21,11 +21,12 @@ export const routes: Routes = [
     {path: 'users', component: UsersList, title:"Users | Common Room"},
     {path: 'users/:username', component: UserProfile},
     {path: 'users/me', component: UserProfile},
+    {path: '404', component: NotFound},
   
     //Cualquier otra ruta redirige a home
     {path: '', redirectTo: '/', pathMatch: 'full'},
 
     //Ruta not found
-    {path: '**', component: NotFound}
+    {path: '**', redirectTo: '/404'}
 ];
 

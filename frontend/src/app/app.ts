@@ -21,7 +21,7 @@ export class App {
         const url = event.urlAfterRedirects;
 
         // ! --- Rutas donde NO debe aparecer el layout
-        const hideFor = ['/login', '/register'];
+        const hideFor = ['/login', '/register', '/404'];
 
         this.showLayout.set(!hideFor.includes(url));
       });
