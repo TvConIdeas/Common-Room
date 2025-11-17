@@ -23,7 +23,11 @@
                 <!-- ? === Info del Uusuario === -->
                 <div class="info-wrapper">
                     <div class="info-header">
-                        <h3>{{ selectedUser.username }}</h3>
+                        @if (selectedUser.role === 'ADMIN') {
+                            <h3>{{ selectedUser.username }} ⭐</h3>
+                        } @else {
+                            <h3>{{ selectedUser.username }}</h3>
+                        }
                         <h4>Active since {{selectedUser.createdAt}}</h4>
                     </div>
                     <div class="info-body">
@@ -31,24 +35,26 @@
                     </div>
                     <div class="info-footer">
                         <h3>Total Reviews : {{ reviews.length}}</h3>
+                        <div class="profile-button">
                         @if (isMyProfile) {
-                            <button (click) = "openEditProfileModal()" class="profile-edit-button">Edit Profile</button>
-                            <button (click) = "openChangePasswordModal()" class="profile-edit-button">Edit Password</button>
-                            @if (modalState() === 'editProfile') {
-                                <app-modify-user-modal
-                                    (close) = "closeModal()"
-                                    (submitted) = "refreshUser()"
-                                    [user] = "selectedUser"
-                                ></app-modify-user-modal>
+                                <button (click) = "openEditProfileModal()" class="profile-edit-button">Edit Profile</button>
+                                <button (click) = "openChangePasswordModal()" class="profile-edit-button">Edit Password</button>
+                                @if (modalState() === 'editProfile') {
+                                    <app-modify-user-modal
+                                        (close) = "closeModal()"
+                                        (submitted) = "refreshUser()"
+                                        [user] = "selectedUser"
+                                    ></app-modify-user-modal>
+                                }
+                                @if (modalState() === 'changePassword') {
+                                    <app-change-password-modal
+                                        (close) = "closeModal()"
+                                        (submitted) = "refreshUser()"
+                                        [user] = "selectedUser"
+                                    ></app-change-password-modal>
+                                }
                             }
-                            @if (modalState() === 'changePassword') {
-                                <app-change-password-modal
-                                    (close) = "closeModal()"
-                                    (submitted) = "refreshUser()"
-                                    [user] = "selectedUser"
-                                ></app-change-password-modal>
-                            }
-                        }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -76,7 +82,7 @@
                             <div class="review-body">
                                 <!-- === Movie Title === -->
                                 <div class="review-header">
-                                    <h2>{{review.moviePreview.title}}</h2>
+                                    <h2 [routerLink]="['/movies', review.moviePreview.id]" title="Go to {{review.moviePreview.title}}" >{{review.moviePreview.title}}</h2>
                                     <div class="buttons-container">
                                         <!-- === Buttons Review === -->
                                         @if (isAdmin || isMyProfile) {
