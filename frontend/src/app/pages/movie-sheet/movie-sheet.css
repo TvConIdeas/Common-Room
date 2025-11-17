@@ -134,6 +134,7 @@
     max-width: 70rem;
     margin: 0 auto;
     padding: 1rem;
+    gap: 1rem;
 
     color: var(--text-light);
     background-color: var(--green-semi-dark);
