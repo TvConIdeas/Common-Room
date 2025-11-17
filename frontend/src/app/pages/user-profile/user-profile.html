@@ -32,7 +32,14 @@
                     <div class="info-footer">
                         <h3>Total Reviews : {{ reviews.length}}</h3>
                         @if (isMyProfile) {
-                            <button class="profile-edit-button">Edit Profile</button>
+                            <button (click) = "openEditProfileModal()" class="profile-edit-button">Edit Profile</button>
+                            @if (modalState() === 'editProfile') {
+                                <app-modify-user-modal
+                                    (close) = "closeModal()"
+                                    (submitted) = "refreshUser()"
+                                    [user] = "selectedUser"
+                                ></app-modify-user-modal>
+                            }
                         }
                     </div>
                 </div>
@@ -68,9 +75,9 @@
                                             <button (click)="onDeleteReview(review.id)" title="Delete Review">🗑️</button>
                                         }
                                         @if (isMyProfile) {
-                                            <button (click)="openReviewModal()" title="Edit Review">✏️</button>
-                                            @if (isModalOpen()) {
-                                                <app-review-modal (close)="closeReviewModal()" (submitted)="refreshReviews()" [movie]="review.moviePreview" [review]="review"></app-review-modal>
+                                            <button (click)="openEditReviewModal(review)" title="Edit Review">✏️</button>
+                                            @if (modalState() === "editReview") {
+                                                <app-review-modal (close)="closeModal()" (submitted)="refreshReviews()" [movie]="review.moviePreview" [review]="review"></app-review-modal>
                                             }
                                         }
                                     </div>

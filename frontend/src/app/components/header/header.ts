@@ -26,7 +26,10 @@ export class Header implements OnInit{
     // Se ejecuta al inicio y se actualiza cada vez que cambie el estado (en auth service)
     this.auth.loggedIn$.subscribe(value => {
       this.isLoggedIn = value;
-      this.currentUser = this.auth.getUsername()
+    });
+
+    this.auth.username$.subscribe(username => {
+      this.currentUser = username;
     });
 
     this.searchForm = this.fb.group({

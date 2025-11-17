@@ -22,8 +22,8 @@ export class MovieSheet implements OnInit{
   selectedReview: Review | null = null
 
   isLoggedIn = false
-  currentUsername: string | null = null
   isAdmin: boolean = false // El current user es admin?
+  currentUsername: string | null = null
   currentUserReview: Review | null = null
 
   // * ======== Contructor | ngOnInit ========

@@ -84,6 +84,9 @@ public class UserController {
     @PutMapping("/{username}")
     public ResponseEntity<?> modifyUser(@PathVariable String username,
                                         @Valid @RequestBody UserUpdateDTO userUpdateDTO){
+
+        System.out.println("Controler | Username Viejo ="+ username);
+        System.out.println("Controler | Username Nuevo ="+ userUpdateDTO.getUsername());
         TokenResponse tokenResponse = userService.modifyUser(username, userUpdateDTO);
 
         if(tokenResponse != null){ // Si se modifica el username, se genera nuevo token
