@@ -8,10 +8,11 @@ import { ReviewModal } from "../../components/review-modal/review-modal";
 import { AuthService } from '../../services/auth-service';
 import { ModifyUserModal } from '../../components/modify-user-modal/modify-user-modal';
 import { Subscription } from 'rxjs';
+import { ChangePasswordModal } from '../../components/change-password-modal/change-password-modal';
 
 @Component({
   selector: 'app-user-profile',
-  imports: [RouterLink, ReviewModal, ModifyUserModal],
+  imports: [RouterLink, ReviewModal, ModifyUserModal, ChangePasswordModal],
   templateUrl: './user-profile.html',
   styleUrl: './user-profile.css'
 })

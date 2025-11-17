@@ -17,7 +17,6 @@ export class ModifyUserModal implements OnInit{
   close = output<void>();
   submitted = output<void>();
   editProfileForm!: FormGroup;
-  passwordForm!:FormGroup;
 
   // * ======== Contructor | ngOnInit ========
   constructor(
@@ -37,12 +36,6 @@ export class ModifyUserModal implements OnInit{
           Validators.maxLength(255)],
       profilePictureUrl:[this.user()?.profilePictureUrl ?? '', 
         Validators.pattern(/^(https?:\/\/)?([\w\-]+\.)+[a-z]{2,6}(:\d+)?(\/[^\s]*)?$/i)]
-    })
-
-    this.passwordForm = this.fb.group({
-      oldPassword: ['', Validators.required],
-      newPassword: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', Validators.required]
     })
   }
 
