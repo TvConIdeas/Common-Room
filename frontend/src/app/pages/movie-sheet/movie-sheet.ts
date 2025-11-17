@@ -18,10 +18,13 @@ export class MovieSheet implements OnInit{
   // * ======== Variables ========
   chosenMovie!: MovieDetails
   reviews : Review[] = []
-  isModalOpen = signal(false) // Variable reactiva (cuando cambia su valor, Angular actualiza automáticamente la vista)
+  modalState = signal<"create" | "edit" | null>(null) // Variable reactiva (cuando cambia su valor, Angular actualiza automáticamente la vista)
+  selectedReview: Review | null = null
 
   isLoggedIn = false
   currentUsername: string | null = null
+  isAdmin: boolean = false // El current user es admin?
+  currentUserReview: Review | null = null
 
   // * ======== Contructor | ngOnInit ========
   constructor(private route: ActivatedRoute,
@@ -36,9 +39,11 @@ export class MovieSheet implements OnInit{
 
     this.isLoggedIn = this.auth.isLoggedIn()
     this.currentUsername = this.auth.getUsername()
+    this.isAdmin = (this.auth.getUserRole() === 'ADMIN')
+    if(this.currentUsername){
+      this.getCurrentUserReview(this.currentUsername, movieId)
+    }
 
-    console.log(this.isLoggedIn)
-    console.log(this.currentUsername)
     // Cargamos la pelicula y sus reviews
     this.loadMovie(movieId)
     this.loadReviews(movieId)
@@ -61,21 +66,13 @@ export class MovieSheet implements OnInit{
     })
   }
 
-  // ! -------- Metodo para mostrar los botones --------
-  userReview(review : Review){
-    if(review.userPreview.username === this.currentUsername){
-      return true
-    }
-    return false
-  }
-
   // ! -------- Metodo para borrar reviews --------
   onDeleteReview(reviewId : number){
     if(confirm('Are your sure you want to delete this review?')){
       this.rService.deleteReview(reviewId).subscribe({
         next: () => {
           alert('Review deleted succesfully.')
-          this.loadReviews(this.chosenMovie.id)
+          this.refreshReviews()
         },
         error: (e) => {
           console.error(e)
@@ -86,17 +83,24 @@ export class MovieSheet implements OnInit{
   }
 
   // ! ====== Metodos para el Model ======
-  openReviewModal(){
-    this.isModalOpen.set(true)
+  openCreateModal(){
+    this.selectedReview = null
+    this.modalState.set("create")
   }
 
-  closeReviewModal(){
-    this.isModalOpen.set(false)
+  openEditModal(review: Review){
+    this.selectedReview = review
+    this.modalState.set("edit")
+  }
+
+  closeModal(){
+    this.modalState.set(null)
   }
 
   // ? ----- Para reiniciar la pagina cuando se agregue o edite -----
   refreshReviews() {
     this.loadReviews(this.chosenMovie.id);
+      this.getCurrentUserReview(this.currentUsername!, this.chosenMovie.id) // esta funcion se llama ANTES de verificar que haya un user logueado
   }
 
   // * -------- Metodo para reemplazar posters sin imagen --------
@@ -109,5 +113,14 @@ export class MovieSheet implements OnInit{
   noProfilePicture(event: Event): void {
     const img = event.target as HTMLImageElement;
     img.src = 'assets/img/user.png';
+  }
+
+  getCurrentUserReview(username: string, movieId: number){
+    this.rService.getUserReviewForMovie(username, movieId).subscribe({
+      next: (data) => {
+        this.currentUserReview = data
+      },
+      error: (e) => console.error(e)
+    })
   }
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -122,6 +123,21 @@ public class ReviewService {
     public Review getReviewById(Long reviewId){
         return reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new ReviewNotFoundException("Review does not exist"));
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<ReviewResponseDTO> getUserReviewForMovie(String username, Long movieId){
+        /*
+        validar user - validar movie - buscar review - mapear review
+         */
+
+        UserPreviewDTO userPreview = userService.getUserPreview(username);
+        MoviePreviewDTO moviePreview = movieService.findMoviePreviewById(movieId);
+
+        return reviewRepository.findByUserIdAndMovieId(userPreview.getId(), movieId)
+                .map(review ->
+                        ReviewMapper.entityToResponseDTO(review, moviePreview, userPreview)
+                );
     }
 
     // ========== VALIDACIONES ==========
