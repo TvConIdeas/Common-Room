@@ -33,8 +33,10 @@ export class UserService {
 
   //Modificar perfil propio
   //El backend devueleve un TokenResponse si se modifica el username
-  updateUser(username: string, dto: User): Observable<TokenResponse | void>{
-    return this.http.put<TokenResponse | void>(`${this.URL}/${username}`, dto)
+  updateUser(username: string, userUpdateDTO: User): Observable<TokenResponse | void>{
+    console.log("Service | Username (Viejo) =" + username)
+    console.log("Service | userUpdateDTO (Nuevo) =" + userUpdateDTO.username)
+    return this.http.put<TokenResponse | void>(`${this.URL}/${username}`, userUpdateDTO)
   }
 
   //Cambiar contraseña

@@ -1,15 +1,18 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { UserService } from '../../services/user-service';
-import { ActivatedRoute, RouterLink} from '@angular/router';
+import { ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { User } from '../../models/User';
 import { ReviewService } from '../../services/review-service';
 import { Review } from '../../models/Review';
 import { ReviewModal } from "../../components/review-modal/review-modal";
 import { AuthService } from '../../services/auth-service';
+import { ModifyUserModal } from '../../components/modify-user-modal/modify-user-modal';
+import { Subscription } from 'rxjs';
+import { ChangePasswordModal } from '../../components/change-password-modal/change-password-modal';
 
 @Component({
   selector: 'app-user-profile',
-  imports: [RouterLink, ReviewModal],
+  imports: [RouterLink, ReviewModal, ModifyUserModal, ChangePasswordModal],
   templateUrl: './user-profile.html',
   styleUrl: './user-profile.css'
 })
@@ -17,22 +20,25 @@ export class UserProfile implements OnInit{
   // * ======== Variables ========
   selectedUser: User | null = null
   currentUsername: string | null = null
+  reviews: Review[] = []
   isMyProfile = false
   isAdmin = false
-  reviews: Review[] = []
-  isModalOpen = signal(false)
+  modalState = signal<"editReview"| "editProfile" | "changePassword" | null>(null) // Variable reactiva (cuando cambia su valor, Angular actualiza automáticamente la vista)
+  selectedReview: Review | null = null
+  private routeSubscription !: Subscription
 
   // * ======== Contructor | ngOnInit ========
   constructor(private route: ActivatedRoute, 
+    private router : Router,
     public uService: UserService,
     private rService: ReviewService,
     private auth: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.currentUsername = this.auth.getUsername()
-    // Suscribirse a los cambios en los parametros de la ruta | Header
-    this.route.params.subscribe(params => {
+    this.routeSubscription = this.route.params.subscribe(params => {
+      this.currentUsername = this.auth.getUsername()
+      console.log("Nombre actual en el Token : " + this.currentUsername)
       const user = params['username'];
       if (user) {
         this.loadUser(user)
@@ -79,17 +85,30 @@ export class UserProfile implements OnInit{
   }
 
   // ! ====== Metodos para los modales ======
-  openReviewModal(){
-    this.isModalOpen.set(true)
+  openEditReviewModal(review: Review){
+    this.selectedReview = review
+    this.modalState.set("editReview")
   }
 
-  closeReviewModal(){
-    this.isModalOpen.set(false)
+  openEditProfileModal(){
+    this.modalState.set("editProfile")
+  }
+
+  openChangePasswordModal(){
+    this.modalState.set("changePassword")
+  }
+
+  closeModal(){
+    this.modalState.set(null)
   }
   
   // ? ----- Para reiniciar la pagina cuando se agregue o edite -----
   refreshReviews() {
     this.loadReviews(this.selectedUser!.username);
+  }
+
+  refreshUser() {
+    this.loadUser(this.currentUsername!);
   }
 
   // * -------- Metodo para reemplazar posters sin imagen --------

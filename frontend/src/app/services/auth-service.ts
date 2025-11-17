@@ -15,6 +15,9 @@ export class AuthService {
   private loggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn()); // guarda el estado actual (logueado o no)
   loggedIn$ = this.loggedInSubject.asObservable(); // observable que otros componentes (como el header) pueden escuchar
 
+  private usernameInSubject = new BehaviorSubject<string|null>(this.getUsername());
+  username$ = this.usernameInSubject.asObservable();
+
   constructor(private http: HttpClient, private router: Router) {}
 
   login(user: LoginRequest): Observable<TokenResponse> {
@@ -37,17 +40,6 @@ export class AuthService {
   }
 
   logout() {
-    // this.http.post<void>('http://localhost:8080/logout', {}).subscribe({
-    //   next: () => {
-    //     localStorage.removeItem('access_token');
-    //     localStorage.removeItem('refresh_token');
-    //     localStorage.removeItem('username');
-    //     localStorage.removeItem('role');
-    //     this.loggedInSubject.next(false);
-    //     this.router.navigate(['/']);
-    //   },
-    //   error: (e) => console.error(e)
-    // });
     this.http.post<void>('http://localhost:8080/logout', {}).pipe(
       // 'finalize' se ejecutará después de 'next' O 'error'
       finalize(() => {
@@ -76,6 +68,8 @@ export class AuthService {
     localStorage.setItem('refresh_token', response.refresh_token);
     localStorage.setItem('username', response.username);
     localStorage.setItem('role', response.role);
+
+    this.usernameInSubject.next(response.username);
   }
 
   isLoggedIn(): boolean {

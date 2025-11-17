@@ -51,7 +51,7 @@ public class UserService {
     @Transactional
     public TokenResponse modifyUser(String username, UserUpdateDTO dto){
         User foundUser = findUserByUsername(username); // Obtener user completo
-
+        System.out.println("Service 1 - Inicio");
         // Chequear campos a modificar
         boolean usernameChanged = dto.getUsername() != null && !dto.getUsername().isBlank() && !dto.getUsername().equals(username);
         boolean emailChanged = dto.getEmail() != null && !dto.getEmail().equals(foundUser.getEmail());
@@ -71,6 +71,7 @@ public class UserService {
         if(profilePictureChanged) foundUser.setProfilePictureUrl(dto.getProfilePictureUrl());
 
         userRepository.save(foundUser); // Guardar cambios del user
+        System.out.println("Service 2 - Repo");
 
         // Si se cambió el username, se debe generar un nuevo token
         if(usernameChanged){
@@ -80,6 +81,7 @@ public class UserService {
             jwtService.saveUserToken(foundUser, newToken); // Guardar token nuevo
             return new TokenResponse(newToken, newRefreshToken, foundUser.getUsername(), foundUser.getRole().name());
         }
+
         return null; // Devolver null en caso que no se haya modificado username
     }
 
@@ -136,6 +138,7 @@ public class UserService {
 
     public User getCurrentUser(){
         Authentication auth = AuthService.getAuthetication();
+        System.out.println("Service | GetCurrentUser = " + auth.getName());
         return userRepository.findByUsername(auth.getName())
                 .orElseThrow(() -> new UserNotFoundException("You must be authenticated"));
     }
