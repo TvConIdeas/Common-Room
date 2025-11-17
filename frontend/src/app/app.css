@@ -1,4 +1,5 @@
 main {
+    align-items: center;
     padding: 1.25rem;
     transition: margin-left 0.35s ease;
     margin-top: 4.5rem;
