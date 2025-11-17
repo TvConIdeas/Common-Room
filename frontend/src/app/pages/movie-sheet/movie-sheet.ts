@@ -65,9 +65,8 @@ export class MovieSheet implements OnInit{
   userReview(review : Review){
     if(review.userPreview.username === this.currentUsername){
       return true
-    }else{
-      return false
     }
+    return false
   }
 
   // ! -------- Metodo para borrar reviews --------
