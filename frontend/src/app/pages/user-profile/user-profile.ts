@@ -1,16 +1,18 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { UserService } from '../../services/user-service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, RouterLink, Router } from '@angular/router';
+import { Subscription, switchMap } from 'rxjs';
 import { User } from '../../models/User';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReviewService } from '../../services/review-service';
 import { Review } from '../../models/Review';
 import { ReviewModal } from "../../components/review-modal/review-modal";
+import ChangePassword from '../../models/ChangePassword';
 import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-user-profile',
-  imports: [RouterLink, ReviewModal],
+  imports: [RouterLink, ReviewModal, ReactiveFormsModule],
   templateUrl: './user-profile.html',
   styleUrl: './user-profile.css'
 })
@@ -78,27 +80,3 @@ export class UserProfile implements OnInit{
     this.isModalOpen.set(false)
   }
 }
-
-
-
-// this.route.paramMap.pipe(
-//       switchMap(params => {
-//         const username = params.get('username')
-
-//         if(!username){
-//           throw new Error('User not found.')
-//         }
-
-//         this.isMyProfile = (username === 'me')
-
-//         if(this.isMyProfile){
-//           return this.uService.getMyProfile()
-//         }
-//         else{
-//           return this.uService.getUserProfile(username)
-//         }
-//       })
-//     ).subscribe({
-//       next: (data) => {this.selectedUser = data},
-//       error: (e) => {console.error(e)}
-//     })
