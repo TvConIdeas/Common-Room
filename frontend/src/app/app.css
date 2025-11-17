@@ -3,6 +3,7 @@ main {
     transition: margin-left 0.35s ease;
     margin-top: 4.5rem;
     margin-left: 5em;
+    min-height: calc(100vh - 4.5rem - 6rem); 
 }
 
 /* ! __________ Responsive __________ */

@@ -16,7 +16,7 @@
 }
 
 /* * ======== Elemento | Back Button ======== */
-.register-logo {
+.back-button {
     position: absolute;
     top: 1.5rem;
     left: 1.5rem;
@@ -26,7 +26,7 @@
     cursor: pointer;
 }
 
-.register-logo .logo-img {
+.back-button .logo-img {
     width: clamp(2rem, 6vw, 3.5rem);
     height: auto;
     max-height: 4rem;
@@ -34,7 +34,7 @@
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.register-logo:hover .logo-img {
+.back-button:hover .logo-img {
     filter: brightness(1.2);
     transform: scale(1.2);
 }
@@ -57,7 +57,7 @@
     text-align: center;
     text-decoration: underline;
 
-    margin-bottom: 1.8rem;
+    margin-bottom: 0.7rem;
     margin-top: 0.5rem;
 
     color: var(--green-semi-dark);
@@ -220,7 +220,7 @@
 .shooting-star:nth-child(5) { top: 65%; left: -100px; animation-delay: 3s; }
 .shooting-star:nth-child(6) { top: 80%; left: -100px; animation-delay: 4s; }
 
-/* ! ======== Responsive ======== */
+/* ! __________ Responsive __________ */
 @media (max-width: 768px) {
 
     .register-container form {

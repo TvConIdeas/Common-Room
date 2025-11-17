@@ -1,126 +1,37 @@
-@if(selectedUser){
-    <img src="{{selectedUser.profilePictureUrl}}" alt="{{selectedUser.username}}" />
-    <h3>{{selectedUser.username}}</h3>
-    <h4>{{selectedUser.description}}</h4>
-
-    @if(isMyProfile){
-        <button (click)="openModal()">Edit Profile</button>
-    }
-
-    @if(showModal){
-        <div class="modal-backdrop" (click)="closeModal()"></div>
-        <div>
-            <div>
-                <h3>Edit Profile</h3>
-                <button (click)="closeModal()" class="close-btn">&times;</button>
-            </div>
-
-            <form [formGroup]="editProfileForm" (ngSubmit)="onProfileSubmit()">
-                <div class="form-group">
-                <label>Change Username</label>
-                <input type="text" formControlName="username">
-                </div>
-                
-                <div class="form-group">
-                <label>Change Email</label>
-                <input type="email" formControlName="email">
-                </div>
-
-                <div class="form-group">
-                <label>Change Profile Picture (URL)</label>
-                <input type="text" formControlName="profilePictureUrl">
-                </div>
-
-                <div class="form-group">
-                <label>Change Description</label>
-                <input type="text" formControlName="description">
-                </div>
-
-                <div>
-                    <button (click)="openPasswordModal()">Change Password</button>
-                    <button>Delete Profile</button>
-
-                    <button>Confirm</button>
-                </div>
-            </form>
-        </div>
-    }
-
-    @if(showPasswordModal){
-        <div class="modal-backdrop" (click)="closePasswordModal()"></div>
-  
-        <div>
-            <div>
-                <h3>Change Password</h3>
-                <button (click)="closePasswordModal()" class="close-btn">&times;</button>
-            </div>
-        
-            <form [formGroup]="passwordForm" (ngSubmit)="onPasswordSubmit()">
-                <div class="form-group">
-                    <label>Old Password</label>
-                    <input type="password" formControlName="oldPassword">
-                </div>
-
-                <div class="form-group">
-                    <label>New Password</label>
-                    <input type="password" formControlName="newPassword">
-                </div>
-
-                <div class="form-group">
-                    <label>Confirm New Password</label>
-                    <input type="password" formControlName="confirmPassword">
-                </div>
-
-                @if(passwordSuccess){
-                    <div>{{passwordSuccess}}</div>
-                }
-                @if(passwordError){
-                    <div>{{passwordError}}</div>
-                }
-
-                <div>
-                    <button (click)="closePasswordModal()">Cancel</button>
-                    <button type="submit" [disabled]="passwordForm.invalid">Confirm</button>
-                </div>
-            </form>
-        </div>
-    }
-
-    <div class="modal-actions">
-        <button (click)="openDeleteModal()">
-            Delete Profile
-        </button>
-  
-        </div>
-            @if (showDeleteModal) {
-                <div class="modal-backdrop" (click)="closeDeleteModal()"></div>
-                
-                <div>
-                    <div>
-                        <h3>Delete Account</h3>
-                        <button (click)="closeDeleteModal()" class="close-btn">&times;</button>
-                        </div>
-                        
-                        <div class="modal-body">
-                        <p>Are you sure you want to delete your account?</p>
-                        <p>This action cannot be undone. All your reviews will be permanently deleted.</p>
-                        
-                        @if (deleteError) {
-                            <div>{{ deleteError }}</div>
-                        }
+<div class="user-profile-container">
+  @if(selectedUser){
+    <section class="user-section">
+        <img src="{{ selectedUser.profilePictureUrl }}" alt="{{ selectedUser.username }}" />
+        <h3>{{ selectedUser.username }}</h3>
+        <h4>{{ selectedUser.description }}</h4>
+    </section>
+    <section class="reviews-section">
+        <h2 class="title-reviews">{{selectedUser.username}}'s thoughts</h2>
+        @if (reviews.length === 0) {
+            <h3>No hay reseñas todavía</h3>
+        } @else {
+            @for (review of reviews; track review.id) {
+                <div class="review-card">
+                    <div class="review-details" [routerLink]="['/movies', review.moviePreview.id]">
+                        <h3>{{review.moviePreview.title}}</h3>
+                        <h3>{{review.createdAt}}</h3>
+                        <h3>{{review.rating}}</h3>
+                        <h3>{{review.comment}}</h3>
                     </div>
-
-                    <div class="modal-actions">
-                    <button (click)="closeDeleteModal()">
-                        Cancel
-                    </button>
-                    <button (click)="onDeleteConfirm()">
-                        Yes, Delete My Account
-                    </button>
+    
+                    <div class="review-buttons">
+                        <button (click)="openReviewModal()">Edit</button>
+                        @if (isModalOpen()) {
+                            <app-review-modal (close)="closeReviewModal()" [movie]="review.moviePreview" [review]="review"></app-review-modal>
+                        }
+                        <button (click)="onDeleteReview(review.id)">Delete</button>
                     </div>
                 </div>
             }
-}
-@else{
+        }
+    </section>
+
+  } @else{
     <h3>User not found</h3>
-}
+  }
+</div>
