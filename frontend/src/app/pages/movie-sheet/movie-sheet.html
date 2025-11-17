@@ -87,17 +87,19 @@
             Review By <strong>{{ review.userPreview.username }}</strong>
           </h2>
           <!-- === Buttons Review === -->
-          @if (currentUsername && review.userPreview.username === this.currentUsername) {
-          <button (click)="openEditModal(review)" title="Edit Review">✏️</button>
-          @if (modalState() === "edit") {
-          <app-review-modal
-            (close)="closeModal()"
-            (submitted)="refreshReviews()"  
-            [movie]="chosenMovie"
-            [review]="review"
-          ></app-review-modal>
+          @if (currentUsername && review.userPreview.username === this.currentUsername) { <!-- Si la reseña es del user actual -->
+            <button (click)="openEditModal(review)" title="Edit Review">✏️</button>
+            @if (modalState() === "edit") {
+              <app-review-modal
+                (close)="closeModal()"
+                (submitted)="refreshReviews()"  
+                [movie]="chosenMovie"
+                [review]="review"
+              ></app-review-modal>
+            }
           }
-          <button (click)="onDeleteReview(review.id)" title="Delete Review">🗑️</button>
+          @if ((currentUsername && review.userPreview.username === this.currentUsername) || currentUserRole === "ADMIN") {
+            <button (click)="onDeleteReview(review.id)" title="Delete Review">🗑️</button>
           }
         </div>
 

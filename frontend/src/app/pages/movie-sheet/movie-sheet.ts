@@ -23,6 +23,7 @@ export class MovieSheet implements OnInit{
 
   isLoggedIn = false
   currentUsername: string | null = null
+  currentUserRole: string | null = null
   currentUserReview: Review | null = null
 
   // * ======== Contructor | ngOnInit ========
@@ -38,6 +39,7 @@ export class MovieSheet implements OnInit{
 
     this.isLoggedIn = this.auth.isLoggedIn()
     this.currentUsername = this.auth.getUsername()
+    this.currentUserRole = this.auth.getUserRole()
     if(this.currentUsername){
       this.getCurrentUserReview(this.currentUsername, movieId)
     }
