@@ -92,4 +92,12 @@ public class ReviewController {
         List<ReviewResponseDTO> reviews = reviewService.getReviewsByMovieId(id);
         return ResponseEntity.ok(reviews);
     }
+
+    @GetMapping("users/{username}/reviews/{movieId}")
+    public ResponseEntity<ReviewResponseDTO> getReviewByUserAndMovie(@PathVariable String username,
+                                                                     @PathVariable Long movieId){
+        return reviewService.getUserReviewForMovie(username, movieId)
+                .map(ResponseEntity::ok) // Si hay reseña, devuelve codigo 200 + reseñaResponse
+                .orElse(ResponseEntity.noContent().build()); // Si no hay reseña, devuelve código 204
+    }
 }

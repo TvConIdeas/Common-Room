@@ -21,7 +21,6 @@ export class UserProfile implements OnInit{
   isMyProfile = false
   reviews: Review[] = []
   isModalOpen = signal(false)
-  isLoggedIn = false
 
   constructor(private route: ActivatedRoute, 
     public uService: UserService,
@@ -35,7 +34,6 @@ export class UserProfile implements OnInit{
       const user = params['username'];
       
       if (user) {
-        this.isLoggedIn = this.auth.isLoggedIn()
         this.loadUser(user)
         this.loadReviews(user)      
         this.isMyProfile = (user === this.selectedUser)

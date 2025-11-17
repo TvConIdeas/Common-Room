@@ -121,6 +121,11 @@ public class UserService {
         return UserMapper.toResponseDTO(user);
     }
 
+    public UserPreviewDTO getUserPreview(String username){
+        User user = findUserByUsername(username);
+        return UserMapper.toPreviewDTO(user);
+    }
+
     @Transactional(readOnly = true)
     public User findUserByUsername(String username){
         return userRepository.findByUsername(username)
