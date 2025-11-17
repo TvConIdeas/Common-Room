@@ -119,7 +119,6 @@ export class MovieSheet implements OnInit{
     this.rService.getUserReviewForMovie(username, movieId).subscribe({
       next: (data) => {
         this.currentUserReview = data
-        this.reviews[]
       },
       error: (e) => console.error(e)
     })
