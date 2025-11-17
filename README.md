@@ -82,7 +82,7 @@ El objetivo principal es fomentar la participación dentro de una comunidad basa
   - Spring Mail
   - Spring Validation
   - DevTools
-- **JJWT** _(manejo de tokens)_
+- **JWT** _(manejo de tokens)_
 - **MySQL** _(base de datos relacional)_
 - **SpringDoc OpenAPI** _(Swagger)_
 - **Lombok**
