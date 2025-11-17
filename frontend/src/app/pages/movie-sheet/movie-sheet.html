@@ -98,7 +98,7 @@
               ></app-review-modal>
             }
           }
-          @if ((currentUsername && review.userPreview.username === this.currentUsername) || currentUserRole === "ADMIN") {
+          @if ((currentUsername && review.userPreview.username === this.currentUsername) || isAdmin) {
             <button (click)="onDeleteReview(review.id)" title="Delete Review">🗑️</button>
           }
         </div>

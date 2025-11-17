@@ -23,7 +23,7 @@ export class MovieSheet implements OnInit{
 
   isLoggedIn = false
   currentUsername: string | null = null
-  currentUserRole: string | null = null
+  isAdmin: boolean = false // El current user es admin?
   currentUserReview: Review | null = null
 
   // * ======== Contructor | ngOnInit ========
@@ -39,7 +39,7 @@ export class MovieSheet implements OnInit{
 
     this.isLoggedIn = this.auth.isLoggedIn()
     this.currentUsername = this.auth.getUsername()
-    this.currentUserRole = this.auth.getUserRole()
+    this.isAdmin = (this.auth.getUserRole() === 'ADMIN')
     if(this.currentUsername){
       this.getCurrentUserReview(this.currentUsername, movieId)
     }
@@ -117,7 +117,10 @@ export class MovieSheet implements OnInit{
 
   getCurrentUserReview(username: string, movieId: number){
     this.rService.getUserReviewForMovie(username, movieId).subscribe({
-      next: (data) => {this.currentUserReview = data},
+      next: (data) => {
+        this.currentUserReview = data
+        this.reviews[]
+      },
       error: (e) => console.error(e)
     })
   }
