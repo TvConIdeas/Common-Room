@@ -125,6 +125,7 @@ Entre las más relevantes se incluyen:
 - RF30-RF32: Exploración de perfiles de otros usuarios.
 
 > Para ver todos los requisitos, consultar la [documentación completa en PDF](./docs/gestion/Documentos/TPFinal_Gestion_GrupoN°X_FenoyRivas_Francano_Perez_Checkpoint2.pdf).
+
 > Para ver la auditoria y diagramas del proyecto, consultar la [documentación completa en PDF](./docs/metodologia/Auditoria_Metodologia.pdf).
 
 ---
