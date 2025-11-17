@@ -46,7 +46,9 @@
   <section class="reviews-section">
     <!-- ? === Titulo de reseñas === -->
     <h2 class="title-reviews">People's thoughts</h2>
-
+    @if (!isLoggedIn) {
+      <p class="login-text">You must be logged in to add a review...</p>
+    }
     <!-- ? === Boton "Nueva reseña" === -->
     @if (isLoggedIn && !currentUserReview) {
       <button (click)="openCreateModal()" class="addReview-button">Review +</button>
